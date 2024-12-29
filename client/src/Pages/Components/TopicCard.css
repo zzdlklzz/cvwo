@@ -1,0 +1,14 @@
+.topic-card {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 240px;
+    width: 320px;
+    border-radius: 20px;
+}
+
+.card-image {
+    padding: 2px;
+    align-items: center;
+    justify-items: center;
+}
