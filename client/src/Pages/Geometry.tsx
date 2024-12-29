@@ -1,6 +1,6 @@
 
 
-export default function Algebra() {
+export default function Geometry() {
     return (
         <div></div>
     );

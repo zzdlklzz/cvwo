@@ -1,18 +1,50 @@
 import './Homepage.css'
-import TitleCard from "./Components/TitleCard.tsx";
-import TopicCard from "./Components/TopicCard.tsx";
-import algebra from "/categories/algebra.png";
-import calculus from "/categories/calculus.png";
-import geometry from "/categories/geometry.png";
+import Card from "../types.tsx"
+import TitleCard from "./Components/TitleCard.tsx"
+import TopicCard from "./Components/TopicCard.tsx"
+import algebra from "/categories/algebra.png"
+import calculus from "/categories/calculus.png"
+import geometry from "/categories/geometry.png"
 import numberTheory from "/categories/number theory.png"
-import pAndStats from "/categories/probability and statistics.png";
-import others from "/categories/others.png";
-import {Box} from "@mui/material";
+import pAndStats from "/categories/probability and statistics.png"
+import others from "/categories/others.png"
+import {Box} from "@mui/material"
 
-const topicCards1 = ["Algebra", "Calculus", "Geometry"];
-const topicCards2 = ["Number Theory", "Probability and Statistics", "Others"];
-const topicPics1 = [algebra, calculus, geometry];
-const topicPics2 = [numberTheory, pAndStats, others];
+const topicCards1: Card[] = [
+    {
+        topic: "Algebra",
+        image: algebra,
+        link: "/algebra",
+    },
+    {
+        topic: "Calculus",
+        image: calculus,
+        link: "/calculus",
+    },
+    {
+        topic: "Geometry",
+        image: geometry,
+        link: "/geometry",
+    }
+]
+
+const topicCards2: Card[] = [
+    {
+        topic: "Number Theory",
+        image: numberTheory,
+        link: "/numbertheory",
+    },
+    {
+        topic: "Probability and Statistics",
+        image: pAndStats,
+        link: "/probandstats",
+    },
+    {
+        topic: "Others",
+        image: others,
+        link: "/others",
+    }
+]
 
 function Homepage() {
 
@@ -30,10 +62,11 @@ function Homepage() {
                     justifyContent: "space-between",
                     gap: 18
                 }}>
-                    {topicCards1.map((topics) => (
+                    {topicCards1.map((card) => (
                         <TopicCard
-                            topic={topics}
-                            image={topicPics1[topicCards1.indexOf(topics)]}>
+                            topic={card.topic}
+                            image={card.image}
+                            link={card.link}>
                         </TopicCard>
                     ))}
                 </Box>
@@ -43,10 +76,11 @@ function Homepage() {
                     justifyContent: "space-between",
                     gap: 18
                 }}>
-                    {topicCards2.map((topics) => (
+                    {topicCards2.map((card) => (
                         <TopicCard
-                            topic={topics}
-                            image={topicPics2[topicCards2.indexOf(topics)]}>
+                            topic={card.topic}
+                            image={card.image}
+                            link={card.link}>
                         </TopicCard>
                     ))}
                 </Box>

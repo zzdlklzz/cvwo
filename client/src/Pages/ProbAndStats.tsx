@@ -1,6 +1,6 @@
 
 
-export default function Algebra() {
+export default function ProbAndStats() {
     return (
         <div></div>
     );

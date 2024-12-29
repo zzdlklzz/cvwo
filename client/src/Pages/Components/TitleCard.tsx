@@ -1,5 +1,5 @@
-import "./TitleCard.css";
-import {Paper, Typography} from "@mui/material";
+import "./TitleCard.css"
+import {Paper, Typography} from "@mui/material"
 
 
 export default function TitleCard() {
