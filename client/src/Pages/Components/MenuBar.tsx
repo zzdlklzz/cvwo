@@ -90,14 +90,13 @@ export default function MenuBar() {
                     zIndex: 1,
                     height: 75,
                     borderRadius: 4,
-                    mt: 3,
+                    mt: 7,
                     ml: -2
                 }}>
                 <MenuRounded sx={{
                     height: 65,
                     width: 65
-                }}>
-                </MenuRounded>
+                }}></MenuRounded>
                 <Typography variant="h2" sx={{ m: 1 }}>Menu</Typography>
             </Button>
             <Drawer open={open} onClose={toggleDrawer(false)}>

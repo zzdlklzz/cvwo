@@ -1,7 +1,9 @@
-
+import TopicPageFormat from "./Components/TopicPageFormat.tsx"
 
 export default function NumberTheory() {
     return (
-        <div></div>
+        <>
+            <TopicPageFormat></TopicPageFormat>
+        </>
     );
 }

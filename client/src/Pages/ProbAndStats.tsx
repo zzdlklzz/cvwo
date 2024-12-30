@@ -1,7 +1,9 @@
-
+import TopicPageFormat from "./Components/TopicPageFormat.tsx"
 
 export default function ProbAndStats() {
     return (
-        <div></div>
+        <>
+            <TopicPageFormat></TopicPageFormat>
+        </>
     );
 }
