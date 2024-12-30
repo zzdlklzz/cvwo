@@ -1,14 +1,14 @@
-import './Homepage.css'
-import Card from "../types.tsx"
+import { Card } from "../types.tsx"
 import TitleCard from "./Components/TitleCard.tsx"
 import TopicCard from "./Components/TopicCard.tsx"
+import MenuBar from "./Components/MenuBar.tsx"
+import { Box, Container } from '@mui/material'
 import algebra from "/categories/algebra.png"
 import calculus from "/categories/calculus.png"
 import geometry from "/categories/geometry.png"
 import numberTheory from "/categories/number theory.png"
 import pAndStats from "/categories/probability and statistics.png"
 import others from "/categories/others.png"
-import {Box} from "@mui/material"
 
 const topicCards1: Card[] = [
     {
@@ -50,41 +50,49 @@ function Homepage() {
 
     return (
         <>
-            <TitleCard/>
-            <Box className="topic-wrapper" sx={{
+            <MenuBar/>
+            <Container sx={{
                 display: "flex",
-                flexDirection: "column",
-                gap: 10
+                justifyContent: "center"
             }}>
+                <TitleCard/>
                 <Box sx={{
                     display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    gap: 18
+                    flexDirection: "column",
+                    gap: 10,
+                    mt: "180px",
+                    position: "absolute"
                 }}>
-                    {topicCards1.map((card) => (
-                        <TopicCard
-                            topic={card.topic}
-                            image={card.image}
-                            link={card.link}>
-                        </TopicCard>
-                    ))}
+                    <Box sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        gap: 18
+                    }}>
+                        {topicCards1.map((card) => (
+                            <TopicCard
+                                topic={card.topic}
+                                image={card.image}
+                                link={card.link}>
+                            </TopicCard>
+                        ))}
+                    </Box>
+                    <Box sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        gap: 18
+                    }}>
+                        {topicCards2.map((card) => (
+                            <TopicCard
+                                topic={card.topic}
+                                image={card.image}
+                                link={card.link}>
+                            </TopicCard>
+                        ))}
+                    </Box>
                 </Box>
-                <Box sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    gap: 18
-                }}>
-                    {topicCards2.map((card) => (
-                        <TopicCard
-                            topic={card.topic}
-                            image={card.image}
-                            link={card.link}>
-                        </TopicCard>
-                    ))}
-                </Box>
-            </Box>
+            </Container>
         </>
     );
 }

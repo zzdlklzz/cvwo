@@ -1,7 +1,11 @@
-type Card = {
+export type Card = {
     topic: string;
     image: File;
     link: string;
 }
 
-export default Card;
+export type MenuTopic = {
+    topic: string;
+    link: string;
+}
+

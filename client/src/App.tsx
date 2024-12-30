@@ -16,15 +16,15 @@ function App() {
         <Container
             className="background" style={{backgroundImage: `url(${background})`}}
             disableGutters="false" maxWidth="false"
-            sx={{minWidth: 1680}}>
+            sx={{minWidth: 1680, minHeight: 980, zIndex: 0}}>
             <BrowserRouter>
                 <Routes>
                     <Route path="/algebra" element={<Algebra/>}/>
                     <Route path="/calculus" element={<Calculus/>}/>
-                    <Route path="geometry" element={<Geometry/>}/>
-                    <Route path="numbertheory" element={<NumberTheory/>}/>
-                    <Route path="probandstats" element={<ProbAndStats/>}/>
-                    <Route path="others" element={<Others/>}/>
+                    <Route path="/geometry" element={<Geometry/>}/>
+                    <Route path="/numbertheory" element={<NumberTheory/>}/>
+                    <Route path="/probandstats" element={<ProbAndStats/>}/>
+                    <Route path="/others" element={<Others/>}/>
                     <Route path="/" element={<Homepage/>}/>
                     <Route index element={<Homepage/>}/>
                 </Routes>
