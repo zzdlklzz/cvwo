@@ -3,17 +3,37 @@ package main
 import (
 	"fmt"
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/log"
+	"github.com/gofiber/template/html/v2"
+	"github.com/zzdlklzz/cvwo/controllers"
+	"github.com/zzdlklzz/cvwo/initializers"
+	"log"
+	"os"
 )
 
+func init() {
+	initializers.LoadEnvVariables()
+	initializers.ConnectToDatabase()
+	initializers.SyncDB()
+}
+
 func main() {
-	fmt.Print("test")
+	fmt.Println("http://localhost:4000/test")
 
-	app := fiber.New()
+	// Load templates
+	engine := html.New("./views", ".html")
 
-	app.Get("/healthcheck", func(c *fiber.Ctx) error {
-		return c.SendString("help me")
+	// App setup
+	app := fiber.New(fiber.Config{
+		Views: engine,
 	})
 
-	log.Fatal(app.Listen(":4000"))
+	// App config
+	app.Static("/", "./public")
+
+	// Routes
+	app.Get("/test", controllers.PostsIndex)
+	app.Get("/", controllers.Home)
+
+	// Start app
+	log.Fatal(app.Listen(":" + os.Getenv("PORT")))
 }
