@@ -16,23 +16,33 @@ func init() {
 	initializers.SyncDB()
 }
 
+// Load templates
+var engine = html.New("./views", ".html")
+
+// App setup
+var app = fiber.New(fiber.Config{
+	Views: engine,
+})
+
+func SetUpRoutes() {
+	clientRoutes := []string{
+		"/", "/algebra", "/calculus", "/geometry", "/numbertheory", "/probandstats", "/others",
+	}
+	for _, route := range clientRoutes {
+		app.Get(route, controllers.Home)
+	}
+}
+
 func main() {
 	fmt.Println("http://localhost:4000/test")
-
-	// Load templates
-	engine := html.New("./views", ".html")
-
-	// App setup
-	app := fiber.New(fiber.Config{
-		Views: engine,
-	})
+	fmt.Println("http://localhost:4000")
 
 	// App config
-	app.Static("/", "./public")
+	app.Static("/", "../public")
 
 	// Routes
 	app.Get("/test", controllers.PostsIndex)
-	app.Get("/", controllers.Home)
+	SetUpRoutes()
 
 	// Start app
 	log.Fatal(app.Listen(":" + os.Getenv("PORT")))

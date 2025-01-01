@@ -2,8 +2,10 @@ import "./TopicCard.css"
 import {Card, CardContent, CardMedia, Typography, Button } from "@mui/material"
 import {Link} from "react-router-dom"
 
+// @ts-ignore
 export default function TopicCard({topic, image, link}) {
     return (
+        // @ts-ignore
         <Card className="topic-card" variant="elevation" square="false" elevation="24">
             <CardMedia className="card-image" component="img" height="150" src={image}
                        alt={topic} sx={{ objectFit: "contain", mt: 2}}>
