@@ -12,7 +12,9 @@ import ProbAndStats from "./Pages/ProbAndStats.tsx"
 
 function App() {
 
+
     return (
+        // @ts-ignore
         <Container
             className="background" style={{backgroundImage: `url(${background})`}}
             disableGutters="false" maxWidth="false"

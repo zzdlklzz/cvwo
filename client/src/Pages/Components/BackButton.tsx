@@ -9,7 +9,7 @@ export default function BackButton() {
         <Container sx={{
             position: "absolute",
             right: 0,
-            width: 200
+            width: 200,
         }}>
             <Button variant="contained" onClick={() => {navigate(-1);}} sx={{
                 bgcolor: "white",
@@ -17,7 +17,7 @@ export default function BackButton() {
                 height: 75,
                 borderRadius: 4,
                 mt: 7,
-                ml: -12
+                ml: -12,
             }}>
                 <ArrowBackRounded sx={{
                     color: "black",

@@ -1,6 +1,6 @@
 export type Card = {
     topic: string;
-    image: File;
+    image: string;
     link: string;
 }
 

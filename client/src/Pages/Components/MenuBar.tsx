@@ -19,7 +19,7 @@ export default function MenuBar() {
 
     const [open, setOpen] = React.useState(false);
 
-    const toggleDrawer = (newOpen) => () => {
+    const toggleDrawer = (newOpen: boolean) => () => {
         setOpen(newOpen);
     }
 
@@ -79,19 +79,21 @@ export default function MenuBar() {
     );
 
     return (
-        <Container disableGutters="true" sx={{
+        <Container sx={{
             height: "100vh",
             width: 200,
-            position: "absolute"
+            position: "absolute",
+            ml: -3,
         }}>
-            <Button variant="contained" color="black" onClick={toggleDrawer(true)}
+            <Button variant="contained" onClick={toggleDrawer(true)}
                 sx={{
                     bgcolor: "white",
+                    color: "black",
                     zIndex: 1,
                     height: 75,
                     borderRadius: 4,
                     mt: 7,
-                    ml: -2
+                    ml: -2,
                 }}>
                 <MenuRounded sx={{
                     height: 65,
