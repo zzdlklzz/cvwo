@@ -34,8 +34,8 @@ func SetUpRoutes() {
 }
 
 func main() {
-	fmt.Println("http://localhost:4000/test")
-	fmt.Println("http://localhost:4000")
+
+	fmt.Println("App can be found at http://localhost:4000")
 
 	// App config
 	app.Static("/", "../public")

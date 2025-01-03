@@ -80,9 +80,8 @@ export default function MenuBar() {
 
     return (
         <Container sx={{
-            height: "100vh",
             width: 200,
-            position: "absolute",
+            position: "relative",
             ml: -3,
         }}>
             <Button variant="contained" onClick={toggleDrawer(true)}
@@ -93,7 +92,7 @@ export default function MenuBar() {
                     height: 75,
                     borderRadius: 4,
                     mt: 7,
-                    ml: -2,
+                    ml: -1.8,
                 }}>
                 <MenuRounded sx={{
                     height: 65,

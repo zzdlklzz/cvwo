@@ -6,12 +6,12 @@ export default function TitleCard() {
         // @ts-ignore
         <Paper elevation="24" square="false" sx={{
             height: 120,
-            width: 500,
+            width: 600,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             position: "absolute",
-            borderRadius: 20,
+            borderRadius: 4,
             textAlign: "center",
         }}>
             <Typography variant="h1">

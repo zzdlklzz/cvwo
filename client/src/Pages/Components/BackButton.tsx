@@ -4,11 +4,10 @@ import { useNavigate } from "react-router-dom"
 
 
 export default function BackButton() {
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     return (
         <Container sx={{
-            position: "absolute",
-            right: 0,
+            position: "relative",
             width: 200,
         }}>
             <Button variant="contained" onClick={() => {navigate(-1);}} sx={{
@@ -17,7 +16,7 @@ export default function BackButton() {
                 height: 75,
                 borderRadius: 4,
                 mt: 7,
-                ml: -12,
+                ml: -3,
             }}>
                 <ArrowBackRounded sx={{
                     color: "black",

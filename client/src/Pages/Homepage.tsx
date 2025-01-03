@@ -1,4 +1,4 @@
-import { Card } from "../types.tsx"
+import { TopicsCard } from "../types.tsx"
 import TitleCard from "./Components/TitleCard.tsx"
 import TopicCard from "./Components/TopicCard.tsx"
 import MenuBar from "./Components/MenuBar.tsx"
@@ -10,7 +10,7 @@ import numberTheory from "/categories/number theory.png"
 import pAndStats from "/categories/probability and statistics.png"
 import others from "/categories/others.png"
 
-const topicCards1: Card[] = [
+const topicCards1: TopicsCard[] = [
     {
         topic: "Algebra",
         image: algebra,
@@ -28,7 +28,7 @@ const topicCards1: Card[] = [
     }
 ]
 
-const topicCards2: Card[] = [
+const topicCards2: TopicsCard[] = [
     {
         topic: "Number Theory",
         image: numberTheory,
@@ -53,7 +53,9 @@ function Homepage() {
             <MenuBar/>
             <Container sx={{
                 display: "flex",
-                justifyContent: "center"
+                justifyContent: "center",
+                position: "relative",
+                left: -200,
             }}>
                 <TitleCard/>
                 <Box sx={{
@@ -69,7 +71,7 @@ function Homepage() {
                         justifyContent: "space-between",
                         gap: 18
                     }}>
-                        {topicCards1.map((card) => (
+                        {topicCards1.map((card: TopicsCard) => (
                             <TopicCard
                                 topic={card.topic}
                                 image={card.image}
@@ -83,7 +85,7 @@ function Homepage() {
                         justifyContent: "space-between",
                         gap: 18
                     }}>
-                        {topicCards2.map((card) => (
+                        {topicCards2.map((card: TopicsCard) => (
                             <TopicCard
                                 topic={card.topic}
                                 image={card.image}

@@ -12,13 +12,11 @@ import ProbAndStats from "./Pages/ProbAndStats.tsx"
 
 function App() {
 
-
     return (
-        // @ts-ignore
         <Container
             className="background" style={{backgroundImage: `url(${background})`}}
-            disableGutters="false" maxWidth="false"
-            sx={{minWidth: 1680, minHeight: 980, zIndex: 0}}>
+            disableGutters={true} maxWidth={false}
+            sx={{ minWidth: 1920, minHeight: 980, zIndex: 0 }}>
             <BrowserRouter>
                 <Routes>
                     <Route path="/algebra" element={<Algebra/>}/>
