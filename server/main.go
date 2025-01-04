@@ -34,15 +34,17 @@ func SetUpRoutes() {
 }
 
 func main() {
-
+	fmt.Println("http://localhost:4000/test")
 	fmt.Println("App can be found at http://localhost:4000")
 
 	// App config
 	app.Static("/", "../public")
 
 	// Routes
-	app.Get("/test", controllers.PostsIndex)
 	SetUpRoutes()
+
+	// Posts
+	app.Post("/test", controllers.CreatePost)
 
 	// Start app
 	log.Fatal(app.Listen(":" + os.Getenv("PORT")))
