@@ -37,14 +37,7 @@ export default function TopicPageFormat({ topic }: ThreadTopic ) {
                         position: "relative",
                     }}>
                         <CardContent sx={{ width: "97.3%", }}>
-                            <Thread></Thread>
-                            <Thread></Thread>
-                            <Thread></Thread>
-                            <Thread></Thread>
-                            <Thread></Thread>
-                            <Thread></Thread>
-                            <Thread></Thread>
-                            <Thread></Thread>
+                            <Thread topic={topic}></Thread>
                         </CardContent>
                     </Card>
                     <CardActions sx={{

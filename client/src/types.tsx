@@ -12,4 +12,3 @@ export type MenuTopic = {
 export type ThreadTopic = {
     topic: string;
 }
-

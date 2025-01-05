@@ -21,5 +21,9 @@ func ConnectToDatabase() {
 }
 
 func SyncDB() {
-	DB.AutoMigrate(&models.Post{})
+	DB.AutoMigrate(
+		&models.Post{},
+		&models.Comment{},
+		&models.User{},
+	)
 }

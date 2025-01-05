@@ -3,9 +3,11 @@ package main
 import (
 	"fmt"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/template/html/v2"
 	"github.com/zzdlklzz/cvwo/controllers"
 	"github.com/zzdlklzz/cvwo/initializers"
+	"github.com/zzdlklzz/cvwo/routes"
 	"log"
 	"os"
 )
@@ -24,27 +26,24 @@ var app = fiber.New(fiber.Config{
 	Views: engine,
 })
 
-func SetUpRoutes() {
-	clientRoutes := []string{
-		"/", "/algebra", "/calculus", "/geometry", "/numbertheory", "/probandstats", "/others",
-	}
-	for _, route := range clientRoutes {
-		app.Get(route, controllers.Home)
-	}
-}
-
 func main() {
 	fmt.Println("http://localhost:4000/test")
-	fmt.Println("App can be found at http://localhost:4000")
+	fmt.Println("http://localhost:4000")
 
 	// App config
 	app.Static("/", "../public")
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "http://localhost:5173",
+		AllowHeaders: "Origin, Content-Type, Accept",
+		AllowMethods: "GET, POST, HEAD, PUT, DELETE, PATCH",
+	}))
 
 	// Routes
-	SetUpRoutes()
+	routes.SetUpRoutes(app)
 
-	// Posts
+	// Testing
 	app.Post("/test", controllers.CreatePost)
+	app.Delete("/test", controllers.DeleteAllPosts)
 
 	// Start app
 	log.Fatal(app.Listen(":" + os.Getenv("PORT")))
