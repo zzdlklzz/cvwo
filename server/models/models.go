@@ -22,7 +22,9 @@ type Post struct {
 
 type Comment struct {
 	gorm.Model
-	Body   string
-	PostID string
-	UserID string
+	Body   string `json:"body"`
+	PostID string `json:"post_id"`
+	Post   Post   `json:"post";gorm:"foreignKey:PostID"`
+	UserID string `json:"user_id"`
+	User   User   `json:"user";gorm:"foreignKey:UserID"`
 }

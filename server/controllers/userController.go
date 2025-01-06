@@ -12,7 +12,10 @@ func CreateUser(c *fiber.Ctx) error {
 	var userData models.User
 
 	if err := c.BodyParser(&data); err != nil {
-		return c.Status(400).SendString("Unable to parse data")
+		c.Status(400)
+		return c.JSON(fiber.Map{
+			"message": "Error parsing data",
+		})
 	}
 
 	// Check if user already exists
@@ -51,7 +54,10 @@ func LoginUser(c *fiber.Ctx) error {
 	var data map[string]string
 
 	if err := c.BodyParser(&data); err != nil {
-		return c.Status(400).SendString("Unable to parse data")
+		c.Status(400)
+		return c.JSON(fiber.Map{
+			"message": "Error parsing data",
+		})
 	}
 
 	// Check if user already exists

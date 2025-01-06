@@ -12,6 +12,7 @@ import ProbAndStats from "./Pages/ProbAndStats.tsx"
 
 function App() {
 
+    // add register and login pages
     return (
         <Container
             className="background" style={{backgroundImage: `url(${background})`}}

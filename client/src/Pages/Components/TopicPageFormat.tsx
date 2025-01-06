@@ -2,8 +2,10 @@ import MenuBar from "./MenuBar.tsx"
 import BackButton from "./BackButton.tsx"
 import {Button, Card, CardActions, CardContent, Container, Divider, Typography} from "@mui/material"
 import { ThreadTopic } from "../../types.tsx"
-import Thread from "./Thread.tsx"
+import PostList from "./PostList.tsx"
 import { AddRounded } from "@mui/icons-material"
+
+// To implement function for creating post
 
 export default function TopicPageFormat({ topic }: ThreadTopic ) {
     return (
@@ -37,7 +39,7 @@ export default function TopicPageFormat({ topic }: ThreadTopic ) {
                         position: "relative",
                     }}>
                         <CardContent sx={{ width: "97.3%", }}>
-                            <Thread topic={topic}></Thread>
+                            <PostList topic={topic}></PostList>
                         </CardContent>
                     </Card>
                     <CardActions sx={{

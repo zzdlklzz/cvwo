@@ -23,6 +23,9 @@ const theme = createTheme({
         h3: {
             fontSize: 24,
         },
+        h4: {
+            fontSize: 20,
+        },
     }
 })
 

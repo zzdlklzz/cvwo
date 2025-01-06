@@ -13,14 +13,20 @@ func CreatePost(c *fiber.Ctx) error {
 	// Get data off client
 	var post models.Post
 	if err := c.BodyParser(&post); err != nil {
-		return c.Status(400).SendString("Unable to parse body")
+		c.Status(400)
+		return c.JSON(fiber.Map{
+			"message": "Error parsing body",
+		})
 	}
 
 	// Create post
 	result := initializers.DB.Create(&post)
 
 	if result.Error != nil {
-		return c.Status(400).SendString("Error creating post")
+		c.Status(400)
+		return c.JSON(fiber.Map{
+			"message": "Error creating post",
+		})
 	}
 
 	// Return post
@@ -38,7 +44,7 @@ func ReadPost(c *fiber.Ctx) error {
 
 	// Get post
 	var post models.Post
-	result := initializers.DB.Preload("User").First(&post, id)
+	result := initializers.DB.Preload("User").Preload("Comments").First(&post, id)
 
 	// Check if post exists
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
@@ -61,7 +67,14 @@ func ReadPost(c *fiber.Ctx) error {
 func ReadAllPosts(c *fiber.Ctx) error {
 	// Get posts
 	var posts []models.Post
-	initializers.DB.Preload("User").Find(&posts)
+	result := initializers.DB.Preload("User").Preload("Comments").Find(&posts)
+
+	if result.Error != nil {
+		c.Status(400)
+		return c.JSON(fiber.Map{
+			"message": "Error reading posts",
+		})
+	}
 
 	// Return posts
 	return c.JSON(posts)
@@ -76,7 +89,10 @@ func UpdatePost(c *fiber.Ctx) error {
 		Model: gorm.Model{ID: uint(id)},
 	}
 	if err := c.BodyParser(&post); err != nil {
-		return c.Status(400).SendString("Unable to parse body")
+		c.Status(400)
+		return c.JSON(fiber.Map{
+			"message": "Error parsing body",
+		})
 	}
 
 	// Update post
@@ -122,7 +138,6 @@ func DeletePost(c *fiber.Ctx) error {
 	return c.JSON(fiber.Map{
 		"message": "Post deleted successfully",
 	})
-
 }
 
 func DeleteAllPosts(c *fiber.Ctx) error {

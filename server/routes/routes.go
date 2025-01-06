@@ -25,4 +25,11 @@ func SetUpRoutes(app *fiber.App) {
 	app.Get("/api/posts/:id", controllers.ReadPost)
 	app.Put("/api/posts/:id", controllers.UpdatePost)
 	app.Delete("/api/posts/:id", controllers.DeletePost)
+
+	// Comment routes
+	app.Post("/api/comments", controllers.CreateComment)
+	app.Get("/api/posts/comments/:id", controllers.ReadPostComments)
+	app.Get("/api/comments/:id", controllers.ReadComment)
+	app.Put("/api/comments/:id", controllers.UpdateComment)
+	app.Delete("/api/comments/:id", controllers.DeleteComment)
 }

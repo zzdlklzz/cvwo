@@ -42,8 +42,8 @@ func main() {
 	routes.SetUpRoutes(app)
 
 	// Testing
-	app.Post("/test", controllers.CreatePost)
-	app.Delete("/test", controllers.DeleteAllPosts)
+	app.Delete("/deleteposts", controllers.DeleteAllPosts)
+	app.Delete("/deletecomments", controllers.DeleteAllComments)
 
 	// Start app
 	log.Fatal(app.Listen(":" + os.Getenv("PORT")))
