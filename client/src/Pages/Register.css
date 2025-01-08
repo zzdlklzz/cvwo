@@ -1,0 +1,23 @@
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    margin-left: -25px;
+    margin-top: 65px;
+}
+
+.text-field {
+    height: 30px;
+    width: 450px;
+    font-size: 22px;
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: right;
+}
+
+.button {
+    height: 40px;
+    width: 120px;
+}

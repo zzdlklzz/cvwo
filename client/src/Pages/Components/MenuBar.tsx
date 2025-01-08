@@ -10,14 +10,14 @@ import {
     ListItemIcon,
     Typography
 } from "@mui/material"
-import * as React from 'react'
+import { useState } from "react"
 import { MenuRounded, HomeRounded } from "@mui/icons-material"
 import { Link } from "react-router-dom"
 import { MenuTopic } from "../../types.tsx"
 
 export default function MenuBar() {
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     const toggleDrawer = (newOpen: boolean) => () => {
         setOpen(newOpen);
@@ -56,7 +56,7 @@ export default function MenuBar() {
         }}>
             <List>
                 <ListItem>
-                    <ListItemButton component={Link} to="/">
+                    <ListItemButton component={Link} to="/home">
                         <ListItemIcon>
                             <HomeRounded/>
                         </ListItemIcon>

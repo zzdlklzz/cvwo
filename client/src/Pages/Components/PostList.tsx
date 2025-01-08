@@ -35,6 +35,7 @@ export default function PostList({ topic }: ThreadTopic) {
         fetch(`${ENDPOINT}`)
             .then((response) => response.json())
             .then((result) => setPosts(result))
+            .catch((error) => console.log(error));
     }, []);
 
     const topicPosts: Post[] = posts.filter((post) => post.topic == formattedTopic);

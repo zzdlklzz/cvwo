@@ -9,6 +9,8 @@ import geometry from "/categories/geometry.png"
 import numberTheory from "/categories/number theory.png"
 import pAndStats from "/categories/probability and statistics.png"
 import others from "/categories/others.png"
+import {useLocation} from "react-router-dom";
+import BackButton from "./Components/BackButton.tsx";
 
 const topicCards1: TopicsCard[] = [
     {
@@ -48,6 +50,8 @@ const topicCards2: TopicsCard[] = [
 
 function Homepage() {
 
+    const location = useLocation()
+
     return (
         <>
             <MenuBar/>
@@ -55,7 +59,6 @@ function Homepage() {
                 display: "flex",
                 justifyContent: "center",
                 position: "relative",
-                left: -200,
             }}>
                 <TitleCard/>
                 <Box sx={{
@@ -95,6 +98,7 @@ function Homepage() {
                     </Box>
                 </Box>
             </Container>
+            <BackButton/>
         </>
     );
 }

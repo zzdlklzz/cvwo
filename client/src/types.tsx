@@ -39,3 +39,8 @@ export type Comment = {
     user_id: number;
     user: User;
 }
+
+export type UserForm = {
+    name: string;
+    password: string;
+}

@@ -9,6 +9,8 @@ import Geometry from "./Pages/Geometry.tsx"
 import NumberTheory from "./Pages/NumberTheory.tsx"
 import Others from "./Pages/Others.tsx"
 import ProbAndStats from "./Pages/ProbAndStats.tsx"
+import Login from "./Pages/Login.tsx"
+import Register from "./Pages/Register.tsx"
 
 function App() {
 
@@ -26,8 +28,9 @@ function App() {
                     <Route path="/numbertheory" element={<NumberTheory/>}/>
                     <Route path="/probandstats" element={<ProbAndStats/>}/>
                     <Route path="/others" element={<Others/>}/>
-                    <Route path="/" element={<Homepage/>}/>
-                    <Route index element={<Homepage/>}/>
+                    <Route path="/home" element={<Homepage/>}/>
+                    <Route path="/register" element={<Register/>}/>
+                    <Route index element={<Login/>}/>
                 </Routes>
             </BrowserRouter>
         </Container>

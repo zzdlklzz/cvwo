@@ -16,6 +16,7 @@ export default function CommentsList({ id }: PostID) {
         fetch(`${ENDPOINT}/${id}`)
             .then((response) => response.json())
             .then((result) => setComments(result))
+            .catch((error) => console.log(error));
     }, []);
 
 

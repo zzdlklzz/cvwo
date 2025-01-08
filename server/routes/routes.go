@@ -9,7 +9,7 @@ func SetUpRoutes(app *fiber.App) {
 
 	// Render app
 	clientRoutes := []string{
-		"/", "/algebra", "/calculus", "/geometry", "/numbertheory", "/probandstats", "/others",
+		"/", "/home", "/algebra", "/calculus", "/geometry", "/numbertheory", "/probandstats", "/others",
 	}
 	for _, route := range clientRoutes {
 		app.Get(route, controllers.Home)
