@@ -7,10 +7,11 @@ import { AddRounded } from "@mui/icons-material"
 
 // To implement function for creating post
 
-export default function TopicPageFormat({ topic }: ThreadTopic ) {
+export default function TopicPageFormat({ topic, user }: ThreadTopic ) {
+
     return (
         <>
-            <MenuBar/>
+            <MenuBar name={user}/>
             <Container disableGutters={true} sx={{
                 width: 1150,
                 height: 700,
@@ -39,7 +40,7 @@ export default function TopicPageFormat({ topic }: ThreadTopic ) {
                         position: "relative",
                     }}>
                         <CardContent sx={{ width: "97.3%", }}>
-                            <PostList topic={topic}></PostList>
+                            <PostList topic={topic} user={user}></PostList>
                         </CardContent>
                     </Card>
                     <CardActions sx={{
@@ -56,7 +57,7 @@ export default function TopicPageFormat({ topic }: ThreadTopic ) {
                             justifyContent: "center",
                             gap: 1.5,
                         }}>
-                            <AddRounded></AddRounded>
+                            <AddRounded/>
                             <Typography variant="h3">CREATE</Typography>
                         </Button>
                     </CardActions>

@@ -21,3 +21,9 @@
     height: 40px;
     width: 120px;
 }
+
+.register-success {
+    color: green;
+    position: absolute;
+    margin-right: 100px;
+}

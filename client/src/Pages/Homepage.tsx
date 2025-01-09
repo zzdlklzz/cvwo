@@ -9,52 +9,59 @@ import geometry from "/categories/geometry.png"
 import numberTheory from "/categories/number theory.png"
 import pAndStats from "/categories/probability and statistics.png"
 import others from "/categories/others.png"
-import {useLocation} from "react-router-dom";
-import BackButton from "./Components/BackButton.tsx";
-
-const topicCards1: TopicsCard[] = [
-    {
-        topic: "Algebra",
-        image: algebra,
-        link: "/algebra",
-    },
-    {
-        topic: "Calculus",
-        image: calculus,
-        link: "/calculus",
-    },
-    {
-        topic: "Geometry",
-        image: geometry,
-        link: "/geometry",
-    }
-]
-
-const topicCards2: TopicsCard[] = [
-    {
-        topic: "Number Theory",
-        image: numberTheory,
-        link: "/numbertheory",
-    },
-    {
-        topic: "Probability and Statistics",
-        image: pAndStats,
-        link: "/probandstats",
-    },
-    {
-        topic: "Others",
-        image: others,
-        link: "/others",
-    }
-]
+import {useLocation} from "react-router-dom"
+import BackButton from "./Components/BackButton.tsx"
 
 function Homepage() {
 
     const location = useLocation()
+    const user: string = location.state.name;
+
+    const topicCards1: TopicsCard[] = [
+        {
+            topic: "Algebra",
+            image: algebra,
+            link: "/algebra",
+            name: user,
+        },
+        {
+            topic: "Calculus",
+            image: calculus,
+            link: "/calculus",
+            name: user,
+        },
+        {
+            topic: "Geometry",
+            image: geometry,
+            link: "/geometry",
+            name: user,
+        }
+    ]
+
+    const topicCards2: TopicsCard[] = [
+        {
+            topic: "Number Theory",
+            image: numberTheory,
+            link: "/numbertheory",
+            name: user,
+        },
+        {
+            topic: "Probability and Statistics",
+            image: pAndStats,
+            link: "/probandstats",
+            name: user,
+        },
+        {
+            topic: "Others",
+            image: others,
+            link: "/others",
+            name: user,
+        }
+    ]
 
     return (
         <>
-            <MenuBar/>
+            <MenuBar name={user}/>
             <Container sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -78,7 +85,8 @@ function Homepage() {
                             <TopicCard
                                 topic={card.topic}
                                 image={card.image}
-                                link={card.link}>
+                                link={card.link}
+                                name={user}>
                             </TopicCard>
                         ))}
                     </Box>
@@ -92,7 +100,8 @@ function Homepage() {
                             <TopicCard
                                 topic={card.topic}
                                 image={card.image}
-                                link={card.link}>
+                                link={card.link}
+                                name={user}>
                             </TopicCard>
                         ))}
                     </Box>

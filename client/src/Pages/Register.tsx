@@ -1,23 +1,59 @@
-import {Box, Button, Card, CardContent, CardHeader, CircularProgress, Container, Typography} from "@mui/material"
-import {SubmitHandler, useForm} from "react-hook-form";
-import {UserForm} from "../types.tsx";
-import BackButton from "./Components/BackButton.tsx";
+import {Box, Card, CardContent, CardHeader, CircularProgress, Container, Typography} from "@mui/material"
+import { SubmitHandler, useForm } from "react-hook-form"
+import { UserForm } from "../types.tsx"
+import BackButton from "./Components/BackButton.tsx"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
-const ENDPOINT: string = "http://localhost:4000/api/register";
+const USERS_ENDPOINT: string = "http://localhost:4000/api/login";
+const REGISTER_ENDPOINT: string = "http://localhost:4000/api/register";
 
 export default function Register() {
 
     const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<UserForm>();
+    const [users, setUsers] = useState<UserForm[]>([])
+    const [regSuccess, setRegSuccess] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        fetch(`${USERS_ENDPOINT}`)
+            .then((response) => response.json())
+            .then((result) => setUsers(result))
+    }, []);
 
     const onSubmit: SubmitHandler<UserForm> = async (data) => {
-        console.log(data);
-    }
 
-    // useEffect(() => {
-    //     fetch(`${ENDPOINT}`)
-    //         .then((response) => response.json())
-    //         .then((result) => setUsers(result))
-    // }, []);
+        setRegSuccess(false);
+
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        for (let i = 0; i < users.length; i++) {
+            const user: UserForm = users[i];
+            if (user.name === data.name) {
+                setError("name", { message: "Username already exists" });
+                break;
+            }
+
+            if (i === users.length - 1) {
+                fetch(`${REGISTER_ENDPOINT}`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                }).then((response) => { setRegSuccess(response.ok) })
+                    .catch((error) => console.log(error));
+            }
+        }
+
+        if (regSuccess) {
+            setTimeout(() => {
+                navigate("/")
+            }, 1000);
+        }
+
+        console.log(JSON.stringify(data));
+    }
 
     return (
         <Container sx={{
@@ -71,8 +107,18 @@ export default function Register() {
                                {...register("password")}
                                type="password"
                                placeholder="Password (optional)"/>
-                        {errors.password && (<div className="password-error">{errors.password.message}</div>)}
                         <div className="button-wrapper">
+                            {regSuccess && (
+                                <Typography variant="h5" sx={{
+                                    color: "green",
+                                    position: "absolute",
+                                    fontSize: 18,
+                                    mt: 10,
+                                    ml: 3,
+                                }}>
+                                    Registration successful! Redirecting to login...
+                                </Typography>
+                            )}
                             <button className="button"
                                     disabled={isSubmitting}
                                     type="submit">

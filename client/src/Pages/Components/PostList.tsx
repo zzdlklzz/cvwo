@@ -21,7 +21,7 @@ import CommentsList from "./CommentsList.tsx"
 
 const ENDPOINT: string = "http://localhost:4000/api/posts";
 
-export default function PostList({ topic }: ThreadTopic) {
+export default function PostList({ topic, user }: ThreadTopic) {
 
     const formattedTopic: string = topic == "Probability & Statistics"
         ? "probandstats"

@@ -2,6 +2,7 @@ export type TopicsCard = {
     topic: string;
     image: string;
     link: string;
+    name: string;
 }
 
 export type MenuTopic = {
@@ -11,6 +12,7 @@ export type MenuTopic = {
 
 export type ThreadTopic = {
     topic: string;
+    user: string;
 }
 
 export type User = {
@@ -43,4 +45,8 @@ export type Comment = {
 export type UserForm = {
     name: string;
     password: string;
+}
+
+export type LoggedUser = {
+    name: string;
 }

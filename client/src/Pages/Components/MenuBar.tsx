@@ -11,16 +11,23 @@ import {
     Typography
 } from "@mui/material"
 import { useState } from "react"
-import { MenuRounded, HomeRounded } from "@mui/icons-material"
-import { Link } from "react-router-dom"
-import { MenuTopic } from "../../types.tsx"
+import { MenuRounded, HomeRounded, Person } from "@mui/icons-material"
+import { useNavigate } from "react-router-dom"
+import {LoggedUser, MenuTopic} from "../../types.tsx"
 
-export default function MenuBar() {
+// Make function to navigate to link and push user state variable
 
+export default function MenuBar( { name }: LoggedUser) {
+
+    const navigate = useNavigate();
     const [open, setOpen] = useState(false);
 
     const toggleDrawer = (newOpen: boolean) => () => {
         setOpen(newOpen);
+    }
+
+    const handleClick = (link: string) => () => {
+        navigate(link, { state: {name} })
     }
 
     const MenuTopicList: MenuTopic[] = [
@@ -56,7 +63,15 @@ export default function MenuBar() {
         }}>
             <List>
                 <ListItem>
-                    <ListItemButton component={Link} to="/home">
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <Person/>
+                        </ListItemIcon>
+                        <Typography variant="h2">{name}</Typography>
+                    </ListItemButton>
+                </ListItem>
+                <ListItem>
+                    <ListItemButton onClick={handleClick("/home")}>
                         <ListItemIcon>
                             <HomeRounded/>
                         </ListItemIcon>
@@ -68,7 +83,7 @@ export default function MenuBar() {
             <List>
                 { MenuTopicList.map((item) => (
                       <ListItem>
-                          <ListItemButton component={Link} to={item.link}>
+                          <ListItemButton onClick={handleClick(item.link)}>
                               <Typography variant="h3">{item.topic}</Typography>
                           </ListItemButton>
                       </ListItem>
