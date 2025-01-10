@@ -84,3 +84,7 @@ func LoginUser(c *fiber.Ctx) error {
 
 	return c.JSON(users)
 }
+
+//func ReadUser(c *fiber.Ctx) error {
+//
+//}

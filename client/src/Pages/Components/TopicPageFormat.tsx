@@ -4,10 +4,13 @@ import {Button, Card, CardActions, CardContent, Container, Divider, Typography} 
 import { ThreadTopic } from "../../types.tsx"
 import PostList from "./PostList.tsx"
 import { AddRounded } from "@mui/icons-material"
+import { useNavigate } from "react-router-dom"
 
 // To implement function for creating post
 
 export default function TopicPageFormat({ topic, user }: ThreadTopic ) {
+
+    const navigate = useNavigate();
 
     return (
         <>
@@ -49,7 +52,9 @@ export default function TopicPageFormat({ topic, user }: ThreadTopic ) {
                         justifyContent: "right",
                         alignItems: "center",
                     }}>
-                        <Button variant="contained" sx={{
+                        <Button variant="contained" onClick={() => {
+                            navigate("/createpost", { state: {topic, name: user} })
+                        }} sx={{
                             mr: 3,
                             height: 50,
                             width: 160,

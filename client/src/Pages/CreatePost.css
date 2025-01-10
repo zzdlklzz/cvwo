@@ -1,0 +1,29 @@
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    margin-top: 65px;
+}
+
+.title {
+    height: 50px;
+    width: 1000px;
+    font-size: 26px;
+}
+
+.body {
+    resize: none;
+    font-size: 20px;
+    width: 1000px;
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: right;
+    gap: 555px;
+}
+
+.button {
+    height: 40px;
+    width: 200px;
+}

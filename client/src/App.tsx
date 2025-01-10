@@ -11,6 +11,7 @@ import Others from "./Pages/Others.tsx"
 import ProbAndStats from "./Pages/ProbAndStats.tsx"
 import Login from "./Pages/Login.tsx"
 import Register from "./Pages/Register.tsx"
+import CreatePost from "./Pages/CreatePost.tsx"
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
                     <Route path="/others" element={<Others/>}/>
                     <Route path="/home" element={<Homepage/>}/>
                     <Route path="/register" element={<Register/>}/>
+                    <Route path="/createpost" element={<CreatePost/>}/>
                     <Route index element={<Login/>}/>
                 </Routes>
             </BrowserRouter>

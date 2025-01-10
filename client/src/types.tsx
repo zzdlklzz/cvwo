@@ -47,6 +47,17 @@ export type UserForm = {
     password: string;
 }
 
+export type PostForm = {
+    title: string;
+    body: string;
+    image: FileList;
+}
+
+export type CommentForm = {
+    name: string;
+    body: string;
+}
+
 export type LoggedUser = {
     name: string;
 }

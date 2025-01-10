@@ -4,6 +4,7 @@ import { UserForm } from "../types.tsx"
 import BackButton from "./Components/BackButton.tsx"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import "./Register.css"
 
 const USERS_ENDPOINT: string = "http://localhost:4000/api/login";
 const REGISTER_ENDPOINT: string = "http://localhost:4000/api/register";

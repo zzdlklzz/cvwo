@@ -103,9 +103,10 @@ export default function PostList({ topic, user }: ThreadTopic) {
                             <Divider sx={{ border: "1px solid black", }}/>
                             <CardMedia
                                 component="img"
-                                height={(selectedPost && selectedPost.image) === "" ? "0" : "1500"}
+                                height={(selectedPost && selectedPost.image) === "" ? "0" : "1000"}
                                 image={selectedPost && selectedPost.image}
-                                alt="No image selected">
+                                alt="No image selected"
+                                style={{ objectFit: "contain" }}>
                             </CardMedia>
                             <Divider sx={{ border: "1px solid black", }}/>
                             <CardContent sx={{ bgcolor: "secondary.main", }}>
