@@ -80,6 +80,25 @@ func ReadAllPosts(c *fiber.Ctx) error {
 	return c.JSON(posts)
 }
 
+func ReadUserPosts(c *fiber.Ctx) error {
+	// Get username
+	id, _ := strconv.Atoi(c.Params("id"))
+
+	// Get posts
+	var posts []models.Post
+	result := initializers.DB.Where("user_id = ?", id).Find(&posts)
+
+	if result.Error != nil {
+		c.Status(400)
+		return c.JSON(fiber.Map{
+			"message": "Failed to retrieve posts",
+		})
+	}
+
+	// Return posts
+	return c.JSON(posts)
+}
+
 func UpdatePost(c *fiber.Ctx) error {
 	// Get post id
 	id, _ := strconv.Atoi(c.Params("id"))

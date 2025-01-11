@@ -12,6 +12,7 @@ import ProbAndStats from "./Pages/ProbAndStats.tsx"
 import Login from "./Pages/Login.tsx"
 import Register from "./Pages/Register.tsx"
 import CreatePost from "./Pages/CreatePost.tsx"
+import UserPostList from "./Pages/UserPostList.tsx"
 
 function App() {
 
@@ -20,7 +21,7 @@ function App() {
         <Container
             className="background" style={{backgroundImage: `url(${background})`}}
             disableGutters={true} maxWidth={false}
-            sx={{ minWidth: 1920, minHeight: 980, zIndex: 0 }}>
+            sx={{ minWidth: 1920, minHeight: 980, zIndex: 0, }}>
             <BrowserRouter>
                 <Routes>
                     <Route path="/algebra" element={<Algebra/>}/>
@@ -32,6 +33,7 @@ function App() {
                     <Route path="/home" element={<Homepage/>}/>
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/createpost" element={<CreatePost/>}/>
+                    <Route path="/userposts" element={<UserPostList/>}/>
                     <Route index element={<Login/>}/>
                 </Routes>
             </BrowserRouter>

@@ -23,7 +23,7 @@ export default function CommentsList({ id }: PostID) {
     return (
         <List>
             {comments.map((comment) => (
-                <ListItem>
+                <ListItem key={comment.ID}>
                     <Card elevation={3} sx={{
                         bgcolor: "secondary.main",
                         display: "flex",

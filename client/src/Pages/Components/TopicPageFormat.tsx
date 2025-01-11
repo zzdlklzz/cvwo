@@ -6,8 +6,6 @@ import PostList from "./PostList.tsx"
 import { AddRounded } from "@mui/icons-material"
 import { useNavigate } from "react-router-dom"
 
-// To implement function for creating post
-
 export default function TopicPageFormat({ topic, user }: ThreadTopic ) {
 
     const navigate = useNavigate();

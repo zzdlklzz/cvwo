@@ -22,8 +22,6 @@ export default function Login() {
             .catch((error) => console.log(error));
     }, []);
 
-    console.log(users[0]);
-
     const onSubmit: SubmitHandler<UserForm> = async (data) => {
 
         await new Promise((resolve) => setTimeout(resolve, 1000));

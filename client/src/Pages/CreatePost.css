@@ -27,3 +27,10 @@
     height: 40px;
     width: 200px;
 }
+
+.name-error {
+    position: absolute;
+    margin-top: 60px;
+    font-size: 18px;
+    color: red;
+}

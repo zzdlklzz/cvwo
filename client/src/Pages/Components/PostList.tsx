@@ -17,11 +17,9 @@ import CommentsList from "./CommentsList.tsx"
 
 // To implement function to add comment
 
-// For no image upload, value of image should be empty string
-
 const ENDPOINT: string = "http://localhost:4000/api/posts";
 
-export default function PostList({ topic, user }: ThreadTopic) {
+export default function PostList({ topic }: ThreadTopic) {
 
     const formattedTopic: string = topic == "Probability & Statistics"
         ? "probandstats"
@@ -55,7 +53,7 @@ export default function PostList({ topic, user }: ThreadTopic) {
         <>
             <List>
                 { topicPosts.map((post, index) => (
-                    <ListItem>
+                    <ListItem key={post.ID}>
                         <ListItemButton component={Card} elevation={3} onClick={handleOpen(post)} sx={{
                             bgcolor: "secondary.main",
                             height: 200,

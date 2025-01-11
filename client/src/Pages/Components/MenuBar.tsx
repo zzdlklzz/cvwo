@@ -15,7 +15,7 @@ import { MenuRounded, HomeRounded, Person } from "@mui/icons-material"
 import { useNavigate } from "react-router-dom"
 import {LoggedUser, MenuTopic} from "../../types.tsx"
 
-// Make function to navigate to link and push user state variable
+// Make Logout function
 
 export default function MenuBar( { name }: LoggedUser) {
 
@@ -63,7 +63,7 @@ export default function MenuBar( { name }: LoggedUser) {
         }}>
             <List>
                 <ListItem>
-                    <ListItemButton>
+                    <ListItemButton onClick={handleClick("/userposts")}>
                         <ListItemIcon>
                             <Person/>
                         </ListItemIcon>
@@ -82,7 +82,7 @@ export default function MenuBar( { name }: LoggedUser) {
             <Divider/>
             <List>
                 { MenuTopicList.map((item) => (
-                      <ListItem>
+                      <ListItem key={item.topic}>
                           <ListItemButton onClick={handleClick(item.link)}>
                               <Typography variant="h3">{item.topic}</Typography>
                           </ListItemButton>

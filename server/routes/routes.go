@@ -10,7 +10,7 @@ func SetUpRoutes(app *fiber.App) {
 	// Render app
 	clientRoutes := []string{
 		"/", "/home", "/algebra", "/calculus", "/geometry", "/numbertheory", "/probandstats", "/others",
-		"/register", "/createpost",
+		"/register", "/createpost", "/userposts",
 	}
 	for _, route := range clientRoutes {
 		app.Get(route, controllers.Home)
@@ -19,6 +19,7 @@ func SetUpRoutes(app *fiber.App) {
 	// User routes
 	app.Post("/api/register", controllers.CreateUser)
 	app.Get("/api/login", controllers.LoginUser)
+	app.Get("/api/users/:name", controllers.ReadUser)
 
 	// Post routes
 	app.Post("/api/posts", controllers.CreatePost)
@@ -26,6 +27,7 @@ func SetUpRoutes(app *fiber.App) {
 	app.Get("/api/posts/:id", controllers.ReadPost)
 	app.Put("/api/posts/:id", controllers.UpdatePost)
 	app.Delete("/api/posts/:id", controllers.DeletePost)
+	app.Get("/api/posts/user/:id", controllers.ReadUserPosts)
 
 	// Comment routes
 	app.Post("/api/comments", controllers.CreateComment)

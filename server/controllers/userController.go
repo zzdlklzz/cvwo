@@ -1,9 +1,11 @@
 package controllers
 
 import (
+	"errors"
 	"github.com/gofiber/fiber/v2"
 	"github.com/zzdlklzz/cvwo/initializers"
 	"github.com/zzdlklzz/cvwo/models"
+	"gorm.io/gorm"
 	"strings"
 )
 
@@ -85,6 +87,22 @@ func LoginUser(c *fiber.Ctx) error {
 	return c.JSON(users)
 }
 
-//func ReadUser(c *fiber.Ctx) error {
-//
-//}
+func ReadUser(c *fiber.Ctx) error {
+	// Get username
+	name := c.Params("name")
+
+	// Get user
+	var user models.User
+	result := initializers.DB.Where("name = ?", name).First(&user)
+
+	// Check if user exists
+	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+		c.Status(400)
+		return c.JSON(fiber.Map{
+			"message": "User not found",
+		})
+	}
+
+	// Return user
+	return c.JSON(user)
+}
