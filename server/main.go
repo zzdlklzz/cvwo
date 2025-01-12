@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/template/html/v2"
@@ -18,6 +17,8 @@ func init() {
 	initializers.SyncDB()
 }
 
+// React js file in public folder is not updated to current version of frontend
+
 // Load templates
 var engine = html.New("./views", ".html")
 
@@ -27,8 +28,6 @@ var app = fiber.New(fiber.Config{
 })
 
 func main() {
-	fmt.Println("http://localhost:4000/test")
-	fmt.Println("http://localhost:4000")
 
 	// App config
 	app.Static("/", "../public")
@@ -41,7 +40,7 @@ func main() {
 	// Routes
 	routes.SetUpRoutes(app)
 
-	// Testing
+	// Administrative
 	app.Delete("/deleteposts", controllers.DeleteAllPosts)
 	app.Delete("/deletecomments", controllers.DeleteAllComments)
 

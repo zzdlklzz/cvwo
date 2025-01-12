@@ -1,82 +1,81 @@
 import { useLocation, useNavigate } from "react-router-dom"
-import MenuBar from "./Components/MenuBar.tsx"
-import { Card, CardActions, CardContent, CircularProgress, Container, Divider, Typography } from "@mui/material"
-import BackButton from "./Components/BackButton.tsx"
-import { SubmitHandler, useForm } from "react-hook-form"
-import { PostForm } from "../types.tsx"
-import "./CreatePost.css"
+import { PostForm, UserPost } from "../types.tsx"
 import { useEffect, useState } from "react"
+import MenuBar from "./Components/MenuBar.tsx"
+import { Box, Card, CardActions, CardContent, CircularProgress, Container, Divider, Typography } from "@mui/material"
+import BackButton from "./Components/BackButton.tsx"
+import { SubmitHandler, useForm} from "react-hook-form"
+import "./EditPost.css"
 import ImageToBase64 from "./functions/ImageToBase64.tsx"
 
-type LoggedUser = {
-    ID: string;
-    name: string;
-}
+const ENDPOINT: string = "http://localhost:4000/api/posts";
 
-const USERS_ENDPOINT: string = "http://localhost:4000/api/users"
-const POSTS_ENDPOINT: string = "http://localhost:4000/api/posts";
-
-export default function CreatePost() {
+export default function EditPost() {
 
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<PostForm>();
     const navigate = useNavigate();
     const location = useLocation();
     const name: string = location.state.name;
-    const topic: string = location.state.topic;
-    const formattedTopic: string = topic == "Probability & Statistics"
-        ? "probandstats"
-        : topic == "Number Theory"
-            ? "numbertheory"
-            : topic;
-
-    const [loggedUser, setLoggedUser] = useState<LoggedUser>();
+    const post_id: string = location.state.id;
+    const [post, setPost] = useState<UserPost>();
     const [hasError, setHasError] = useState(false);
 
-    let image;
+    // Form value handlers
+    const [title, setTitle] = useState("");
+    const [body, setBody] = useState("");
+    const [image, setImage] = useState("");
 
-    // Fetch user data
+    const fetchPostData = async () => {
+        const response = await fetch(`${ENDPOINT}/${post_id}`);
+        const userPost: UserPost = await response.json(); // Fetch post data
+        return userPost;
+    }
+
+    // Fetch post data
     useEffect(() => {
-        fetch(`${USERS_ENDPOINT}/${name}`)
-            .then((response) => response.json())
-            .then((result) => { setLoggedUser(result);})
+        fetchPostData().then((result) => {
+            setPost(result);
+            setTitle(result.title);
+            setBody(result.body);
+            setImage(result.image);
+        })
             .catch((error) => console.log(error));
     }, []);
 
-    const createPost: SubmitHandler<PostForm> = async (data) => {
+    // Edit post function
+    const editPost: SubmitHandler<PostForm> = async (data) => {
 
         setHasError(false);
 
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         const fileImage: File | undefined = data.image[0];
+        let newImage;
 
         if (fileImage !== undefined) {
-            image = await ImageToBase64(fileImage);
+            newImage = await ImageToBase64(fileImage);
         } else {
-            image = "";
+            newImage = image;
         }
 
-        fetch(`${POSTS_ENDPOINT}`, {
-            method: "POST",
+        fetch(`${ENDPOINT}/${post_id}`, {
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                topic: formattedTopic,
                 title: data.title,
                 body: data.body,
-                image: image,
-                user_id: loggedUser && loggedUser.ID.toString(),
+                image: newImage,
             })
         }).then((response) => {
             if (response.ok) {
-                navigate("/" + formattedTopic, { state: {topic, name} })
-                console.log("Post created successfully");
+                navigate("/userposts", { state: {name} });
+                console.log("Post edited successfully");
             } else {
                 setHasError(true);
             }
-        }).catch((error) => console.log(error));
-
+        })
     }
 
     return (
@@ -98,7 +97,7 @@ export default function CreatePost() {
                         justifyContent: "flex-start",
                         alignItems: "center",
                         ml: 5,
-                    }}>{topic.toUpperCase()}</Typography>
+                    }}>{post && post.topic.toUpperCase()}</Typography>
                     <Divider sx={{ borderColor: "black", }}></Divider>
                     <Card elevation={0} sx={{
                         bgcolor: "secondary.light",
@@ -110,39 +109,55 @@ export default function CreatePost() {
                         position: "relative",
                     }}>
                         <CardContent sx={{ display: "flex", justifyContent: "center", width: "100%", }}>
-                            <form className="form-wrapper" onSubmit={handleSubmit(createPost)}>
+                            <form className="form-wrapper" onSubmit={handleSubmit(editPost)}>
+                                <img src={image} alt="No image selected" height={image === "" ? 0 : 500} style={{
+                                    objectFit: "contain",
+                                }}/>
                                 <input
                                     className="title"
                                     {...register("title", {
                                         required: "Title cannot be empty",
                                     })}
                                     type="text"
-                                    placeholder="Title"/>
+                                    placeholder="Title"
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}/>
                                 {errors.title && (<div className="name-error">{errors.title.message}</div>)}
                                 <textarea
                                     className="body"
                                     {...register("body")}
                                     rows={10}
-                                    placeholder="Description"/>
-                                { hasError && (<Typography variant="h4" sx={{
+                                    placeholder="Description"
+                                    value={body}
+                                    onChange={(e) => setBody(e.target.value)}/>
+                                {hasError && (<Typography variant="h4" sx={{
                                     fontSize: 18,
                                     position: "absolute",
-                                    mt: 47,
-                                    ml: 99,
+                                    mt: image === "" ? 47 : 116,
+                                    ml: 102,
                                     color: "red",
-                                }}>Failed to create post</Typography>) }
+                                }}>Error editing post</Typography>)}
                                 <div className="button-wrapper">
                                     <input
                                         {...register("image")}
                                         type="file"
                                         id="image"
-                                        accept="image/*"/>
+                                        accept="image/*"
+                                    />
                                     <button className="button"
                                             disabled={isSubmitting}
                                             type="submit">
-                                        {isSubmitting ? <CircularProgress size={25}/> : "Create Post"}
+                                        {isSubmitting ? <CircularProgress size={25}/> : "Edit Post"}
                                     </button>
                                 </div>
+                                <Box sx={{
+                                    position: "absolute",
+                                    mt: image === "" ? 48 : 117,
+                                }}>
+                                    <Typography variant="h4" color="primary">
+                                        Choose file to replace current image
+                                    </Typography>
+                                </Box>
                             </form>
                         </CardContent>
                     </Card>

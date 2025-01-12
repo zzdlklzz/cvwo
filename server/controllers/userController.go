@@ -25,7 +25,7 @@ func CreateUser(c *fiber.Ctx) error {
 	if userData.ID != 0 {
 		c.Status(400)
 		return c.JSON(fiber.Map{
-			"message": "username already exists",
+			"message": "Username already exists",
 		})
 	}
 
@@ -53,33 +53,6 @@ func CreateUser(c *fiber.Ctx) error {
 }
 
 func LoginUser(c *fiber.Ctx) error {
-	//var data map[string]string
-	//
-	//if err := c.BodyParser(&data); err != nil {
-	//	c.Status(400)
-	//	return c.JSON(fiber.Map{
-	//		"message": "Error parsing data",
-	//	})
-	//}
-
-	//// Check if user already exists
-	//var user models.User
-	//initializers.DB.Where("name = ?", strings.TrimSpace(data["name"])).First(&user)
-	//if user.ID == 0 {
-	//	c.Status(404)
-	//	return c.JSON(fiber.Map{
-	//		"message": "username does not exist, please create an account",
-	//	})
-	//}
-	//
-	//// Check if password is correct
-	//if user.Password != data["password"] {
-	//	c.Status(400)
-	//	return c.JSON(fiber.Map{
-	//		"message": "Incorrect password",
-	//	})
-	//}
-
 	// Get list of all users
 	var users []models.User
 	initializers.DB.Where("1=1").Find(&users)

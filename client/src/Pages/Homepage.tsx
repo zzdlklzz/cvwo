@@ -82,7 +82,7 @@ function Homepage() {
                         gap: 18
                     }}>
                         {topicCards1.map((card: TopicsCard) => (
-                            <TopicCard
+                            <TopicCard key={card.topic}
                                 topic={card.topic}
                                 image={card.image}
                                 link={card.link}
@@ -97,7 +97,7 @@ function Homepage() {
                         gap: 18
                     }}>
                         {topicCards2.map((card: TopicsCard) => (
-                            <TopicCard
+                            <TopicCard key={card.topic}
                                 topic={card.topic}
                                 image={card.image}
                                 link={card.link}

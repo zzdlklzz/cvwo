@@ -61,3 +61,11 @@ export type CommentForm = {
 export type LoggedUser = {
     name: string;
 }
+
+export type UserPost = {
+    ID: string;
+    title: string;
+    topic: string;
+    body: string;
+    image: string;
+}

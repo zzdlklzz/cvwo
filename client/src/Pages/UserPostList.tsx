@@ -1,7 +1,8 @@
 // Page with list of user's post
+// Delete post function is within this element, edit post is in a separate element
 
 import { useState } from "react"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import {
     Box,
     Button,
@@ -17,18 +18,11 @@ import {
 import MenuBar from "./Components/MenuBar.tsx"
 import { DeleteForever, Edit } from "@mui/icons-material"
 import BackButton from "./Components/BackButton.tsx"
+import { UserPost } from "../types.tsx"
 
 type LoggedUser = {
     ID: string;
     name: string;
-}
-
-type UserPost = {
-    ID: string;
-    title: string;
-    topic: string;
-    body: string;
-    image: string;
 }
 
 const USER_ENDPOINT: string = "http://localhost:4000/api/users";
@@ -37,10 +31,11 @@ const DELETE_ENDPOINT: string = "http://localhost:4000/api/posts";
 
 export default function UserPostList() {
 
+    const navigate = useNavigate();
     const location = useLocation();
     const name: string = location.state.name;
     const [userPosts, setUserPosts] = useState<UserPost[]>();
-    const [deleteOpen, setDeleteOpen] = useState(false);
+    const [deleteOpen, setDeleteOpen] = useState(false); // Delete post popup message
     const [selectedPost, setSelectedPost] = useState<UserPost>();
     const [hasError, setHasError] = useState(false);
 
@@ -123,7 +118,9 @@ export default function UserPostList() {
                                 height: 200,
                                 mt: -1,
                             }}>
-                                <Button variant="contained" onClick={() => {}} sx={{
+                                <Button variant="contained" onClick={() => {
+                                    navigate("/editpost", { state: {id: post.ID, name}})
+                                }} sx={{
                                     height: 50,
                                     width: 130,
                                     gap: 1,

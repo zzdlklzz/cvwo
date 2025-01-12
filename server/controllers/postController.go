@@ -31,10 +31,10 @@ func CreatePost(c *fiber.Ctx) error {
 
 	// Return post
 	return c.JSON(fiber.Map{
-		"Topic": post.Topic,
-		"Title": post.Title,
-		"Body":  post.Body,
-		"Image": post.Image,
+		"topic": post.Topic,
+		"title": post.Title,
+		"body":  post.Body,
+		"image": post.Image,
 	})
 }
 
@@ -56,11 +56,11 @@ func ReadPost(c *fiber.Ctx) error {
 
 	// Return post
 	return c.JSON(fiber.Map{
-		"Topic": post.Topic,
-		"Title": post.Title,
-		"Body":  post.Body,
-		"Image": post.Image,
-		"User":  post.User,
+		"topic": post.Topic,
+		"title": post.Title,
+		"body":  post.Body,
+		"image": post.Image,
+		"user":  post.User,
 	})
 }
 
@@ -171,4 +171,4 @@ func DeleteAllPosts(c *fiber.Ctx) error {
 	return c.JSON(fiber.Map{
 		"message": "All posts have been deleted successfully",
 	})
-}
+} // Only used for administrative purposes

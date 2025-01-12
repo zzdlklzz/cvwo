@@ -11,7 +11,7 @@ import {
     Typography
 } from "@mui/material"
 import { useState } from "react"
-import { MenuRounded, HomeRounded, Person } from "@mui/icons-material"
+import {MenuRounded, HomeRounded, Person, Logout} from "@mui/icons-material"
 import { useNavigate } from "react-router-dom"
 import {LoggedUser, MenuTopic} from "../../types.tsx"
 
@@ -89,6 +89,16 @@ export default function MenuBar( { name }: LoggedUser) {
                       </ListItem>
                     ))
                 }
+            </List>
+            <List sx={{ mt: 30,}}>
+                <ListItem>
+                    <ListItemButton onClick={() => navigate("/")}>
+                        <ListItemIcon>
+                            <Logout/>
+                        </ListItemIcon>
+                        <Typography variant="h2">Logout</Typography>
+                    </ListItemButton>
+                </ListItem>
             </List>
         </Box>
     );

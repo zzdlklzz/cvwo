@@ -5,7 +5,6 @@ import "./Login.css"
 import { useState, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
-
 const ENDPOINT: string = "http://localhost:4000/api/login";
 
 export default function Login() {
@@ -26,13 +25,17 @@ export default function Login() {
 
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
+        // Accounting for no users in database
+        if (users.length === 0) {
+            setError("name", { message: "Username does not exist", })
+        }
+
         for (let i = 0; i < users.length; i++) {
             const user: UserForm = users[i];
             if (user.name === data.name) {
                 if (user.password !== data.password) {
                     setError("password", { message: "Incorrect password", });
                 } else {
-
                     navigate("/home", { state: {name: user.name} })
                 }
                 break;

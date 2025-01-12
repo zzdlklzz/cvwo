@@ -2,25 +2,17 @@ import {Box, Card, CardContent, CardHeader, CircularProgress, Container, Typogra
 import { SubmitHandler, useForm } from "react-hook-form"
 import { UserForm } from "../types.tsx"
 import BackButton from "./Components/BackButton.tsx"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import "./Register.css"
 
-const USERS_ENDPOINT: string = "http://localhost:4000/api/login";
 const REGISTER_ENDPOINT: string = "http://localhost:4000/api/register";
 
 export default function Register() {
 
     const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<UserForm>();
-    const [users, setUsers] = useState<UserForm[]>([])
     const [regSuccess, setRegSuccess] = useState(false);
     const navigate = useNavigate();
-
-    useEffect(() => {
-        fetch(`${USERS_ENDPOINT}`)
-            .then((response) => response.json())
-            .then((result) => setUsers(result))
-    }, []);
 
     const onSubmit: SubmitHandler<UserForm> = async (data) => {
 
@@ -28,32 +20,33 @@ export default function Register() {
 
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
-        for (let i = 0; i < users.length; i++) {
-            const user: UserForm = users[i];
-            if (user.name === data.name) {
-                setError("name", { message: "Username already exists" });
-                break;
-            }
+        const registerUser = async () => {
 
-            if (i === users.length - 1) {
-                fetch(`${REGISTER_ENDPOINT}`, {
+            const response = await fetch(`${REGISTER_ENDPOINT}`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify(data),
-                }).then((response) => { setRegSuccess(response.ok) })
-                    .catch((error) => console.log(error));
+                });
+
+            const result = await response.json();
+
+            if (result.message === "User created successfully") {
+                setRegSuccess(true);
+                setTimeout(() => {
+                    navigate("/");
+                }, 1000);
+            } else if (result.message === "Username already exists") {
+                setError("name", { message: "Username already exists" });
+            } else if (result.message === "Failed to create user") {
+                setError("name", { message: "Error creating user"});
+            } else {
+                setError("name", { message: "Unknown error" });
             }
         }
 
-        if (regSuccess) {
-            setTimeout(() => {
-                navigate("/")
-            }, 1000);
-        }
-
-        console.log(JSON.stringify(data));
+        registerUser().catch((error) => console.log(error));
     }
 
     return (
