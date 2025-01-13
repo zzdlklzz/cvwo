@@ -135,13 +135,36 @@ func DeletePost(c *fiber.Ctx) error {
 
 	// Get post and check if it exists
 	var post models.Post
-	result := initializers.DB.First(&post, id)
+	resultPost := initializers.DB.First(&post, id)
 
-	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+	if errors.Is(resultPost.Error, gorm.ErrRecordNotFound) {
 		c.Status(400)
 		return c.JSON(fiber.Map{
 			"message": "Post not found",
 		})
+	}
+
+	// Get comments of post
+	var comments []models.Comment
+	resultComments := initializers.DB.Where("post_id = ?", id).Find(&comments)
+
+	if errors.Is(resultComments.Error, gorm.ErrRecordNotFound) {
+		c.Status(400)
+		return c.JSON(fiber.Map{
+			"message": "Comments not found",
+		})
+	}
+
+	// Delete comments of post
+	if len(comments) != 0 {
+		deleteComments := initializers.DB.Delete(&comments)
+
+		if deleteComments.Error != nil {
+			c.Status(400)
+			return c.JSON(fiber.Map{
+				"message": "Failed to delete post comments",
+			})
+		}
 	}
 
 	// Delete post
@@ -157,7 +180,7 @@ func DeletePost(c *fiber.Ctx) error {
 	return c.JSON(fiber.Map{
 		"message": "Post deleted successfully",
 	})
-}
+} // Also deletes comments associated to posts
 
 func DeleteAllPosts(c *fiber.Ctx) error {
 	result := initializers.DB.Where("1=1").Delete(&models.Post{})

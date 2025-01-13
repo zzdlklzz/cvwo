@@ -2,7 +2,7 @@ import MenuBar from "./MenuBar.tsx"
 import BackButton from "./BackButton.tsx"
 import {Button, Card, CardActions, CardContent, Container, Divider, Typography} from "@mui/material"
 import { ThreadTopic } from "../../types.tsx"
-import PostList from "./PostList.tsx"
+import TopicPostList from "./TopicPostList.tsx"
 import { AddRounded } from "@mui/icons-material"
 import { useNavigate } from "react-router-dom"
 
@@ -41,7 +41,7 @@ export default function TopicPageFormat({ topic, user }: ThreadTopic ) {
                         position: "relative",
                     }}>
                         <CardContent sx={{ width: "97.3%", }}>
-                            <PostList topic={topic} user={user}></PostList>
+                            <TopicPostList topic={topic} user={user}></TopicPostList>
                         </CardContent>
                     </Card>
                     <CardActions sx={{

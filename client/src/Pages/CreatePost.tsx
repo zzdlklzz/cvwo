@@ -9,11 +9,11 @@ import { useEffect, useState } from "react"
 import ImageToBase64 from "./functions/ImageToBase64.tsx"
 
 type LoggedUser = {
-    ID: string;
+    ID: number;
     name: string;
 }
 
-const USERS_ENDPOINT: string = "http://localhost:4000/api/users"
+const USERS_ENDPOINT: string = "http://localhost:4000/api/users";
 const POSTS_ENDPOINT: string = "http://localhost:4000/api/posts";
 
 export default function CreatePost() {

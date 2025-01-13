@@ -79,3 +79,5 @@ func ReadUser(c *fiber.Ctx) error {
 	// Return user
 	return c.JSON(user)
 }
+
+// Delete user needs to delete associated posts and comments

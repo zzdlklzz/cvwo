@@ -54,7 +54,6 @@ export type PostForm = {
 }
 
 export type CommentForm = {
-    name: string;
     body: string;
 }
 
