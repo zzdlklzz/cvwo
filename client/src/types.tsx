@@ -68,3 +68,9 @@ export type UserPost = {
     body: string;
     image: string;
 }
+
+export type UserComment = {
+    ID: string;
+    body: string;
+    post: Post;
+}

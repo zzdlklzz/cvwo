@@ -1,8 +1,7 @@
-// Page with list of user's post
-// Delete post function is within this element, edit post is in a separate element
+// Delete comment functionality is implemented in this component
 
-import {useEffect, useState} from "react"
 import { useLocation, useNavigate } from "react-router-dom"
+import MenuBar from "./Components/MenuBar.tsx"
 import {
     Box,
     Button,
@@ -15,76 +14,68 @@ import {
     ListItemButton, Modal,
     Typography
 } from "@mui/material"
-import MenuBar from "./Components/MenuBar.tsx"
-import { DeleteForever, Edit } from "@mui/icons-material"
 import BackButton from "./Components/BackButton.tsx"
-import { UserPost } from "../types.tsx"
+import { UserComment } from "../types.tsx"
+import {useEffect, useState} from "react"
+import {DeleteForever, Edit} from "@mui/icons-material";
 
-type LoggedUser = {
-    ID: string;
-    name: string;
-}
+const COMMENTS_ENDPOINT: string = "http://localhost:4000/api/user/comments";
+const DELETE_ENDPOINT: string = "http://localhost:4000/api/comments";
 
-const USER_ENDPOINT: string = "http://localhost:4000/api/users";
-const POSTS_ENDPOINT: string = "http://localhost:4000/api/posts/user";
-const DELETE_ENDPOINT: string = "http://localhost:4000/api/posts";
-
-export default function UserPostList() {
+export default function UserCommentList() {
 
     const navigate = useNavigate();
     const location = useLocation();
     const name: string = location.state.name;
-    const [userPosts, setUserPosts] = useState<UserPost[]>();
-    const [deleteOpen, setDeleteOpen] = useState(false); // Delete post popup message
-    const [selectedPost, setSelectedPost] = useState<UserPost>();
-    const [hasError, setHasError] = useState(false);
-    const [loggedUserID, setLoggedUserID] = useState("");
+    const userID: string = location.state.user_id;
 
-    const fetchData = async () => {
-        const userResponse = await fetch(`${USER_ENDPOINT}/${name}`);
-        const loggedUser: LoggedUser = await userResponse.json(); // Fetch user data to use user ID for post fetch
-        setLoggedUserID(loggedUser.ID);
-        const postsResponse = await fetch(`${POSTS_ENDPOINT}/${loggedUser.ID}`)
-        const userPosts: UserPost[] = await postsResponse.json();
-        return userPosts;
+    const [userComments, setUserComments] = useState<UserComment[]>([])
+    const [deleteOpen, setDeleteOpen] = useState(false); // Delete comment popup message
+    const [selectedComment, setSelectedComment] = useState<UserComment>()
+    const [hasError, setHasError] = useState(false);
+
+    const fetchCommentData = async () => {
+        const response = await fetch(`${COMMENTS_ENDPOINT}/${userID}`)
+        const userComments: UserComment[] = await response.json();
+        return userComments;
     }
 
-    // Fetch user's posts
+    // Fetch user's comments
     useEffect(() => {
-        fetchData().then((result) => setUserPosts(result))
+        fetchCommentData().then((result) => setUserComments(result))
             .catch((error) => console.log(error));
     }, []);
 
-    const handleDelete = (post: UserPost) =>
+    const handleDeleteClose = () => {
+        setDeleteOpen(false);
+        setSelectedComment(undefined);
+        setHasError(false);
+    }
+
+    const handleDelete = (comment: UserComment) =>
         async () => {
 
             await new Promise((resolve) => setTimeout(resolve, 1000));
 
-            fetch(`${DELETE_ENDPOINT}/${post.ID}`, {
+            fetch(`${DELETE_ENDPOINT}/${comment.ID}`, {
                 method: "DELETE",
             }).then((response) => {
                 if (response.ok) {
                     setDeleteOpen(false);
-                    setSelectedPost(undefined);
+                    setSelectedComment(undefined);
                     window.location.reload();
-                    console.log("Post deleted successfully");
+                    console.log("Comment deleted successfully");
                 } else {
                     setHasError(true);
                 }
             }).catch((error) => console.log(error));
         }
 
-    const handleDeleteClose = () => {
-        setDeleteOpen(false);
-        setSelectedPost(undefined);
-        setHasError(false);
-    }
-
-    const userPostList = (
+    const userCommentList = (
         <Box>
             <List>
-                { userPosts && userPosts.map( (post) => (
-                    <ListItem key={post.ID}>
+                { userComments && userComments.map((comment) => (
+                    <ListItem key={comment.ID}>
                         <ListItemButton component={Card} elevation={3} sx={{
                             bgcolor: "secondary.main",
                             height: 200,
@@ -103,17 +94,21 @@ export default function UserPostList() {
                                 gap: 4,
                             }}>
                                 <Typography variant="h2">{ "Topic: " +
-                                    (post.topic === "probandstats"
+                                    (comment.post.topic === "probandstats"
                                         ? "PROBABILITY & STATISTICS"
-                                        : post.topic === "numbertheory"
-                                        ? "NUMBER THEORY"
-                                        : post.topic.toUpperCase())
+                                        : comment.post.topic === "numbertheory"
+                                            ? "NUMBER THEORY"
+                                            : comment.post.topic.toUpperCase())
                                 }</Typography>
-                                <Typography variant="h3">{ "Title: " +
-                                    (post.title.length > 40 ? post.title.substring(0, 39) + "..." : post.title)
+                                <Typography variant="h3">{ "Post Title: " +
+                                    (comment.post.title.length > 40
+                                        ? comment.post.title.substring(0, 39) + "..."
+                                        : comment.post.title)
                                 }</Typography>
-                                <Typography variant="h4">{ "Description: " +
-                                    (post.body.length > 40 ? post.body.substring(0, 39) + "..." : post.body)
+                                <Typography variant="h4">{ "Comment: " +
+                                    (comment.body.length > 40
+                                        ? comment.body.substring(0, 39) + "..."
+                                        : comment.body)
                                 }</Typography>
                             </Box>
                             <Box sx={{
@@ -125,7 +120,7 @@ export default function UserPostList() {
                                 mt: -1,
                             }}>
                                 <Button variant="contained" onClick={() => {
-                                    navigate("/editpost", { state: {id: post.ID, name}})
+                                    // navigate("/editcomment", { state: {id: comment.ID, name}})
                                 }} sx={{
                                     height: 50,
                                     width: 130,
@@ -135,8 +130,8 @@ export default function UserPostList() {
                                     <Typography variant="h4">EDIT</Typography>
                                 </Button>
                                 <Button variant="contained" onClick={() => {
+                                    setSelectedComment(comment);
                                     setDeleteOpen(true);
-                                    setSelectedPost(post);
                                 }} sx={{
                                     bgcolor: "#EA4444",
                                     height: 50,
@@ -149,8 +144,7 @@ export default function UserPostList() {
                             </Box>
                         </ListItemButton>
                     </ListItem>
-                    ))
-                }
+                ))}
                 <Modal open={deleteOpen} onClose={handleDeleteClose}>
                     <Container sx={{ display: "flex", justifyContent: "center", }}>
                         <Box component={Card} elevation={24} sx={{
@@ -169,12 +163,10 @@ export default function UserPostList() {
                                 position: "absolute",
                                 mb: 4,
                                 color: "red",
-                            }}>Failed to delete post</Typography>) }
-                            <Typography variant="h3">Are you sure you want to delete this post?</Typography>
+                            }}>Failed to delete comment</Typography>) }
+                            <Typography variant="h3">Are you sure you want to delete this comment?</Typography>
                             <Box sx={{ display: "flex", justifyContent: "space-evenly", gap: 20, }}>
-                                <Button variant="contained" onClick={
-                                    handleDelete(selectedPost!)
-                                } sx={{
+                                <Button variant="contained" onClick={handleDelete(selectedComment!)} sx={{
                                     bgcolor: "#EA4444",
                                     height: 50,
                                     width: 150,
@@ -215,16 +207,16 @@ export default function UserPostList() {
                             justifyContent: "flex-start",
                             alignItems: "center",
                             ml: 5,
-                        }}>{name}'s Posts</Typography>
+                        }}>{name}'s Comments</Typography>
                         <Button variant="contained" onClick={() => {
-                            navigate("/usercomments", { state: {name, user_id: loggedUserID} })
+                            navigate("/userposts", { state: {name} })
                         }} sx={{
                             height: 60,
                             width: 200,
                             mr: 6,
                             bgcolor: "primary.dark",
                         }}>
-                            <Typography variant="h3">MY COMMENTS</Typography>
+                            <Typography variant="h3">MY POSTS</Typography>
                         </Button>
                     </Container>
                     <Divider sx={{ borderColor: "black", }}></Divider>
@@ -238,7 +230,7 @@ export default function UserPostList() {
                         position: "relative",
                     }}>
                         <CardContent sx={{ width: "97.3%", }}>
-                            {userPostList}
+                            {userCommentList}
                         </CardContent>
                     </Card>
                     <Divider sx={{ borderColor: "black", }}></Divider>

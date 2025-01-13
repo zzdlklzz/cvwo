@@ -14,6 +14,7 @@ import Register from "./Pages/Register.tsx"
 import CreatePost from "./Pages/CreatePost.tsx"
 import UserPostList from "./Pages/UserPostList.tsx"
 import EditPost from "./Pages/EditPost.tsx"
+import UserCommentList from "./Pages/UserCommentList.tsx"
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
                     <Route path="/createpost" element={<CreatePost/>}/>
                     <Route path="/userposts" element={<UserPostList/>}/>
                     <Route path="/editpost" element={<EditPost/>}/>
+                    <Route path="/usercomments" element={<UserCommentList/>}/>
                     <Route index element={<Login/>}/>
                 </Routes>
             </BrowserRouter>

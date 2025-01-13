@@ -113,7 +113,7 @@ func ReadUserComments(c *fiber.Ctx) error {
 
 	// Get comments
 	var comments []models.Comment
-	result := initializers.DB.Where("user_id = ?", id).Find(&comments)
+	result := initializers.DB.Where("user_id = ?", id).Preload("Post").Find(&comments)
 
 	if result.Error != nil {
 		c.Status(400)
