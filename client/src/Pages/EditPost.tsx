@@ -2,7 +2,17 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { PostForm, UserPost } from "../types.tsx"
 import { useEffect, useState } from "react"
 import MenuBar from "./Components/MenuBar.tsx"
-import { Box, Card, CardActions, CardContent, CircularProgress, Container, Divider, Typography } from "@mui/material"
+import {
+    Box,
+    Button,
+    Card,
+    CardActions,
+    CardContent,
+    CircularProgress,
+    Container,
+    Divider,
+    Typography
+} from "@mui/material"
 import BackButton from "./Components/BackButton.tsx"
 import { SubmitHandler, useForm} from "react-hook-form"
 import "./EditPost.css"
@@ -109,12 +119,12 @@ export default function EditPost() {
                         position: "relative",
                     }}>
                         <CardContent sx={{ display: "flex", justifyContent: "center", width: "100%", }}>
-                            <form className="form-wrapper" onSubmit={handleSubmit(editPost)}>
+                            <form className="edit-form-wrapper" onSubmit={handleSubmit(editPost)}>
                                 <img src={image} alt="No image selected" height={image === "" ? 0 : 500} style={{
                                     objectFit: "contain",
                                 }}/>
                                 <input
-                                    className="title"
+                                    className="edit-title"
                                     {...register("title", {
                                         required: "Title cannot be empty",
                                     })}
@@ -122,9 +132,14 @@ export default function EditPost() {
                                     placeholder="Title"
                                     value={title}
                                     onChange={(e) => setTitle(e.target.value)}/>
-                                {errors.title && (<div className="name-error">{errors.title.message}</div>)}
+                                {errors.title && (<Typography variant="h4" sx={{
+                                    position: "absolute",
+                                    mt: image === "" ? 15 : 78,
+                                    mr: 95,
+                                    color: "red",
+                                }}>{errors.title.message}</Typography>)}
                                 <textarea
-                                    className="body"
+                                    className="edit-body"
                                     {...register("body")}
                                     rows={10}
                                     placeholder="Description"
@@ -137,24 +152,30 @@ export default function EditPost() {
                                     ml: 102,
                                     color: "red",
                                 }}>Error editing post</Typography>)}
-                                <div className="button-wrapper">
+                                <div className="edit-button-wrapper">
                                     <input
                                         {...register("image")}
                                         type="file"
                                         id="image"
                                         accept="image/*"
                                     />
-                                    <button className="button"
-                                            disabled={isSubmitting}
-                                            type="submit">
-                                        {isSubmitting ? <CircularProgress size={25}/> : "Edit Post"}
-                                    </button>
+                                    <Button variant="contained" disabled={isSubmitting} type="submit" sx={{
+                                        height: 40,
+                                        width: 160,
+                                    }}>
+                                        {isSubmitting ? <CircularProgress size={25}/> : (
+                                            <Typography variant="h4">EDIT POST</Typography>
+                                        )}
+                                    </Button>
                                 </div>
                                 <Box sx={{
                                     position: "absolute",
+                                    width: "100%",
                                     mt: image === "" ? 48 : 117,
                                 }}>
-                                    <Typography variant="h4" color="primary">
+                                    <Typography variant="h4" color="primary" sx={{
+                                        mr: 70,
+                                    }}>
                                         Choose file to replace current image
                                     </Typography>
                                 </Box>

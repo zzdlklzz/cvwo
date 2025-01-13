@@ -1,26 +1,28 @@
-.form-wrapper {
+.edit-form-wrapper {
     display: flex;
     flex-direction: column;
     gap: 60px;
     margin-top: 65px;
 }
 
-.title {
+.edit-title {
     height: 50px;
     width: 1000px;
     font-size: 26px;
 }
 
-.body {
+.edit-body {
     resize: none;
     font-size: 20px;
     width: 1000px;
+    margin-top: 0;
 }
 
-.button-wrapper {
+.edit-button-wrapper {
     display: flex;
     justify-content: right;
     gap: 595px;
+    margin-right: 50px;
 }
 
 .button {
@@ -28,10 +30,4 @@
     width: 160px;
 }
 
-.name-error {
-    position: absolute;
-    margin-top: 60px;
-    font-size: 18px;
-    color: red;
-}
 

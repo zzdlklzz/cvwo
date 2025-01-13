@@ -4,9 +4,9 @@ import { Card, CardActions, CardContent, CircularProgress, Container, Divider, T
 import BackButton from "./Components/BackButton.tsx"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { PostForm } from "../types.tsx"
-import "./CreatePost.css"
 import { useEffect, useState } from "react"
 import ImageToBase64 from "./functions/ImageToBase64.tsx"
+import "./CreatePost.css"
 
 type LoggedUser = {
     ID: number;
@@ -110,17 +110,17 @@ export default function CreatePost() {
                         position: "relative",
                     }}>
                         <CardContent sx={{ display: "flex", justifyContent: "center", width: "100%", }}>
-                            <form className="form-wrapper" onSubmit={handleSubmit(createPost)}>
+                            <form className="post-form-wrapper" onSubmit={handleSubmit(createPost)}>
                                 <input
-                                    className="title"
+                                    className="create-title"
                                     {...register("title", {
                                         required: "Title cannot be empty",
                                     })}
                                     type="text"
                                     placeholder="Title"/>
-                                {errors.title && (<div className="name-error">{errors.title.message}</div>)}
+                                {errors.title && (<div className="create-name-error">{errors.title.message}</div>)}
                                 <textarea
-                                    className="body"
+                                    className="create-body"
                                     {...register("body")}
                                     rows={10}
                                     placeholder="Description"/>
@@ -131,7 +131,7 @@ export default function CreatePost() {
                                     ml: 99,
                                     color: "red",
                                 }}>Failed to create post</Typography>) }
-                                <div className="button-wrapper">
+                                <div className="create-button-wrapper">
                                     <input
                                         {...register("image")}
                                         type="file"

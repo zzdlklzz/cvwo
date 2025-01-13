@@ -1,6 +1,8 @@
-.form-wrapper {
+.reg-form-wrapper {
     display: flex;
     flex-direction: column;
+    justify-content: start;
+    align-items: center;
     gap: 60px;
     margin-left: -25px;
     margin-top: 65px;
@@ -12,7 +14,8 @@
     font-size: 22px;
 }
 
-.button-wrapper {
+.reg-button-wrapper {
+    width: 100%;
     display: flex;
     justify-content: right;
 }
@@ -20,13 +23,6 @@
 .button {
     height: 40px;
     width: 120px;
-}
-
-.name-error {
-    position: absolute;
-    margin-top: 40px;
-    font-size: 14px;
-    color: red;
 }
 
 .register-success {

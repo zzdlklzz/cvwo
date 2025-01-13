@@ -82,7 +82,7 @@ export default function Register() {
                     display: "flex",
                     justifyContent: "center",
                 }}>
-                    <form className="form-wrapper" onSubmit={handleSubmit(onSubmit)}>
+                    <form className="reg-form-wrapper" onSubmit={handleSubmit(onSubmit)}>
                         <input
                             className="text-field"
                             {...register("name", {
@@ -96,12 +96,18 @@ export default function Register() {
                             })}
                             type="text"
                             placeholder="Username"/>
-                        {errors.name && (<div className="name-error">{errors.name.message}</div>)}
+                        {errors.name && (<Typography variant="h4" sx={{
+                                    position: "absolute",
+                                    color: "red",
+                                    mt: 6,
+                                    mr: 30.5,
+                                    fontSize: 16,
+                        }}>{errors.name.message}</Typography>)}
                         <input className="text-field"
                                {...register("password")}
                                type="password"
                                placeholder="Password (optional)"/>
-                        <div className="button-wrapper">
+                        <div className="reg-button-wrapper">
                             {regSuccess && (
                                 <Typography variant="h5" sx={{
                                     color: "green",

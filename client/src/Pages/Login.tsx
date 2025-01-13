@@ -80,7 +80,7 @@ export default function Login() {
                    display: "flex",
                    justifyContent: "center",
                }}>
-                    <form className="form-wrapper" onSubmit={handleSubmit(onSubmit)}>
+                    <form className="login-form-wrapper" onSubmit={handleSubmit(onSubmit)}>
                         <input
                             className="text-field"
                             {...register("name", {
@@ -94,12 +94,24 @@ export default function Login() {
                             })}
                             type="text"
                             placeholder="Username"/>
-                        {errors.name && (<div className="name-error">{errors.name.message}</div>)}
+                        {errors.name && (<Typography variant="h4" sx={{
+                            position: "absolute",
+                            color: "red",
+                            mt: 6,
+                            mr: 30.5,
+                            fontSize: 16,
+                        }}>{errors.name.message}</Typography>)}
                         <input className="text-field"
                                {...register("password")}
                                type="password"
                                placeholder="Password (optional)"/>
-                        {errors.password && (<div className="password-error">{errors.password.message}</div>)}
+                        {errors.password && (<Typography variant="h4" sx={{
+                            position: "absolute",
+                            color: "red",
+                            mt: 17,
+                            mr: 37,
+                            fontSize: 16,
+                        }}>{errors.password.message}</Typography>)}
                         <Button component={Link} to="/register" variant="text" color="primary" sx={{
                             position: "absolute",
                             mt: 17,
@@ -108,7 +120,7 @@ export default function Login() {
                         }}>
                             <Typography variant="h5">Not registered? Click here to make an account!</Typography>
                         </Button>
-                        <div className="button-wrapper">
+                        <div className="login-button-wrapper">
                             <button className="button"
                                     disabled={isSubmitting}
                                     type="submit">

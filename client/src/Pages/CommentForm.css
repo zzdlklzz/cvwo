@@ -1,18 +1,21 @@
-.form-wrapper {
+.comment-form-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 40px;
 }
 
-.body {
-    margin-top: -50px;
+.comment-body {
+    resize: none;
+    width: 600px;
     max-width: 600px;
-    margin-left: 25px;
+    margin-left: 10px;
+    font-size: 18px;
 }
 
 .comment-error {
     position: absolute;
-    margin-top: 160px;
+    margin-top: 220px;
     margin-right: 380px;
     font-size: 18px;
     color: red;
@@ -20,7 +23,7 @@
 
 .submit-error {
     position: absolute;
-    margin-top: 215px;
+    margin-top: 220px;
     margin-left: 450px;
     font-size: 18px;
     color: red;
