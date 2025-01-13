@@ -1,4 +1,4 @@
-.form-wrapper {
+.login-form-wrapper {
     display: flex;
     flex-direction: column;
     gap: 60px;
@@ -12,26 +12,13 @@
     font-size: 22px;
 }
 
-.button-wrapper {
+.login-button-wrapper {
     display: flex;
     justify-content: right;
+    width: 100%;
 }
 
 .button {
     height: 40px;
     width: 120px;
-}
-
-.name-error {
-    position: absolute;
-    margin-top: 40px;
-    font-size: 14px;
-    color: red;
-}
-
-.password-error {
-    position: absolute;
-    margin-top: 135px;
-    font-size: 14px;
-    color: red;
 }

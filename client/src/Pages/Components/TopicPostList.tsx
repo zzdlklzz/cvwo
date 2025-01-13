@@ -194,25 +194,19 @@ export default function TopicPostList({ topic, user }: ThreadTopic) {
                                 sx={{ bgcolor: "primary.light", }}/>
                             <Divider sx={{ border: "1px solid black", }}/>
                             <CardContent sx={{ bgcolor: "secondary.light", }}>
-                                <form className="form-wrapper" onSubmit={handleSubmit(createComment)}>
-                                    <textarea className="body"
+                                <form className="comment-form-wrapper" onSubmit={handleSubmit(createComment)}>
+                                    <textarea className="comment-body"
                                         {...register("body", {
                                             required: "Comment cannot be empty",
                                         })}
-                                        rows={8}
+                                        rows={10}
                                         value={body}
                                         onChange={(e) => setBody(e.target.value)}
                                         placeholder="Description"/>
                                     {errors.body && (<div className="comment-error">{errors.body.message}</div>)}
                                     {hasError && (<div className="submit-error">Error submitting comment</div>)}
                                     <Box sx={{
-                                        display: "flex",
-                                        justifyContent: "right",
-                                        alignItems: "start",
-                                        height: 100,
-                                        width: 700,
-                                        mr: 9,
-                                        mt: -4,
+                                        ml: 64,
                                     }}>
                                         <Button variant="contained" type="submit" disabled={isSubmitting}>
                                             {isSubmitting ? <CircularProgress size={25}/> : (
