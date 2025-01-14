@@ -10,13 +10,13 @@ import {
     ListItemButton,
     Modal,
     Typography
-} from "@mui/material"
-import {ThreadTopic, Post, CommentForm} from "../../types.tsx"
-import { useState, useEffect } from "react"
-import { AddCommentRounded } from "@mui/icons-material"
-import CommentsList from "./CommentsList.tsx"
-import { SubmitHandler, useForm } from "react-hook-form"
-import "../CommentForm.css"
+} from "@mui/material";
+import {ThreadTopic, Post, CommentForm} from "../../types.tsx";
+import { useState, useEffect } from "react";
+import { AddCommentRounded } from "@mui/icons-material";
+import CommentsList from "./CommentsList.tsx";
+import { SubmitHandler, useForm } from "react-hook-form";
+import "../CommentForm.css";
 
 type LoggedUser = {
     ID: number;
@@ -44,7 +44,7 @@ export default function TopicPostList({ topic, user }: ThreadTopic) {
             .catch((error) => console.log(error));
     }, []);
 
-    const topicPosts: Post[] = posts.filter((post) => post.topic == formattedTopic);
+    const topicPosts: Post[] = posts.filter((post: Post) => post.topic == formattedTopic);
 
     // Handlers for opening posts
     const [openPost, setOpenPost] = useState(false);
@@ -64,7 +64,7 @@ export default function TopicPostList({ topic, user }: ThreadTopic) {
     const [hasError, setHasError] = useState(false);
     const [body, setBody] = useState("");
 
-    const createComment: SubmitHandler<CommentForm> = async (data) => {
+    const createComment: SubmitHandler<CommentForm> = async (data: CommentForm) => {
 
         setHasError(false);
 
@@ -101,7 +101,7 @@ export default function TopicPostList({ topic, user }: ThreadTopic) {
     return (
         <>
             <List>
-                { topicPosts.map((post, index) => (
+                { topicPosts.map((post: Post, index: number) => (
                     <ListItem key={post.ID}>
                         <ListItemButton component={Card} elevation={3} onClick={handleOpenPost(post)} sx={{
                             bgcolor: "secondary.main",
@@ -193,7 +193,7 @@ export default function TopicPostList({ topic, user }: ThreadTopic) {
                                 titleTypographyProps={{ variant: "h2" }}
                                 sx={{ bgcolor: "primary.light", }}/>
                             <Divider sx={{ border: "1px solid black", }}/>
-                            <CardContent sx={{ bgcolor: "secondary.light", }}>
+                            <CardContent sx={{ bgcolor: "secondary.light", height: 400 }}>
                                 <form className="comment-form-wrapper" onSubmit={handleSubmit(createComment)}>
                                     <textarea className="comment-body"
                                         {...register("body", {

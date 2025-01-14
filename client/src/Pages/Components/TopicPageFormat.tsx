@@ -1,14 +1,14 @@
-import MenuBar from "./MenuBar.tsx"
-import BackButton from "./BackButton.tsx"
-import {Button, Card, CardActions, CardContent, Container, Divider, Typography} from "@mui/material"
-import { ThreadTopic } from "../../types.tsx"
-import TopicPostList from "./TopicPostList.tsx"
-import { AddRounded } from "@mui/icons-material"
-import { useNavigate } from "react-router-dom"
+import MenuBar from "./MenuBar.tsx";
+import BackButton from "./BackButton.tsx";
+import { Button, Card, CardActions, CardContent, Container, Divider, Typography } from "@mui/material";
+import { ThreadTopic } from "../../types.tsx";
+import TopicPostList from "./TopicPostList.tsx";
+import { AddRounded } from "@mui/icons-material";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 export default function TopicPageFormat({ topic, user }: ThreadTopic ) {
 
-    const navigate = useNavigate();
+    const navigate: NavigateFunction = useNavigate();
 
     return (
         <>

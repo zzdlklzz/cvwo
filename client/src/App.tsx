@@ -1,24 +1,23 @@
-import './App.css'
-import background from "/background.jpg"
-import { Container } from "@mui/material"
-import Homepage from "./Pages/Homepage.tsx"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import Algebra from "./Pages/Algebra.tsx"
-import Calculus from "./Pages/Calculus.tsx"
-import Geometry from "./Pages/Geometry.tsx"
-import NumberTheory from "./Pages/NumberTheory.tsx"
-import Others from "./Pages/Others.tsx"
-import ProbAndStats from "./Pages/ProbAndStats.tsx"
-import Login from "./Pages/Login.tsx"
-import Register from "./Pages/Register.tsx"
-import CreatePost from "./Pages/CreatePost.tsx"
-import UserPostList from "./Pages/UserPostList.tsx"
-import EditPost from "./Pages/EditPost.tsx"
-import UserCommentList from "./Pages/UserCommentList.tsx"
+import './App.css';
+import background from "/background.jpg";
+import { Container } from "@mui/material";
+import Homepage from "./Pages/Homepage.tsx";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Algebra from "./Pages/Algebra.tsx";
+import Calculus from "./Pages/Calculus.tsx";
+import Geometry from "./Pages/Geometry.tsx";
+import NumberTheory from "./Pages/NumberTheory.tsx";
+import Others from "./Pages/Others.tsx";
+import ProbAndStats from "./Pages/ProbAndStats.tsx";
+import Login from "./Pages/Login.tsx";
+import Register from "./Pages/Register.tsx";
+import CreatePost from "./Pages/CreatePost.tsx";
+import UserPostList from "./Pages/UserPostList.tsx";
+import EditPost from "./Pages/EditPost.tsx";
+import UserCommentList from "./Pages/UserCommentList.tsx";
 
 function App() {
 
-    // add register and login pages
     return (
         <Container
             className="background" style={{backgroundImage: `url(${background})`}}

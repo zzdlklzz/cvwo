@@ -1,10 +1,10 @@
-import {Box, Card, CardContent, CardHeader, CircularProgress, Container, Typography} from "@mui/material"
-import { SubmitHandler, useForm } from "react-hook-form"
-import { UserForm } from "../types.tsx"
-import BackButton from "./Components/BackButton.tsx"
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import "./Register.css"
+import { Box, Card, CardContent, CardHeader, CircularProgress, Container, Typography } from "@mui/material";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { UserForm } from "../types.tsx";
+import BackButton from "./Components/BackButton.tsx";
+import { useState } from "react";
+import { NavigateFunction, useNavigate } from "react-router-dom";
+import "./Register.css";
 
 const REGISTER_ENDPOINT: string = "http://localhost:4000/api/register";
 
@@ -12,9 +12,9 @@ export default function Register() {
 
     const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<UserForm>();
     const [regSuccess, setRegSuccess] = useState(false);
-    const navigate = useNavigate();
+    const navigate: NavigateFunction = useNavigate();
 
-    const onSubmit: SubmitHandler<UserForm> = async (data) => {
+    const onSubmit: SubmitHandler<UserForm> = async (data: UserForm) => {
 
         setRegSuccess(false);
 

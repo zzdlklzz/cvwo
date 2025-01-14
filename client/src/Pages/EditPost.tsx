@@ -1,7 +1,7 @@
-import { useLocation, useNavigate } from "react-router-dom"
-import { PostForm, UserPost } from "../types.tsx"
-import { useEffect, useState } from "react"
-import MenuBar from "./Components/MenuBar.tsx"
+import { NavigateFunction, useLocation, useNavigate } from "react-router-dom";
+import { PostForm, UserPost } from "../types.tsx";
+import { useEffect, useState } from "react";
+import MenuBar from "./Components/MenuBar.tsx";
 import {
     Box,
     Button,
@@ -12,18 +12,18 @@ import {
     Container,
     Divider,
     Typography
-} from "@mui/material"
-import BackButton from "./Components/BackButton.tsx"
-import { SubmitHandler, useForm} from "react-hook-form"
-import "./EditPost.css"
-import ImageToBase64 from "./functions/ImageToBase64.tsx"
+} from "@mui/material";
+import BackButton from "./Components/BackButton.tsx";
+import { SubmitHandler, useForm} from "react-hook-form";
+import "./EditPost.css";
+import ImageToBase64 from "./functions/ImageToBase64.tsx";
 
 const ENDPOINT: string = "http://localhost:4000/api/posts";
 
 export default function EditPost() {
 
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<PostForm>();
-    const navigate = useNavigate();
+    const navigate: NavigateFunction = useNavigate();
     const location = useLocation();
     const name: string = location.state.name;
     const post_id: string = location.state.id;
@@ -43,7 +43,7 @@ export default function EditPost() {
 
     // Fetch post data
     useEffect(() => {
-        fetchPostData().then((result) => {
+        fetchPostData().then((result: UserPost) => {
             setPost(result);
             setTitle(result.title);
             setBody(result.body);
@@ -53,7 +53,7 @@ export default function EditPost() {
     }, []);
 
     // Edit post function
-    const editPost: SubmitHandler<PostForm> = async (data) => {
+    const editPost: SubmitHandler<PostForm> = async (data: PostForm) => {
 
         setHasError(false);
 

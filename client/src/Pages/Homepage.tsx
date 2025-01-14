@@ -1,16 +1,16 @@
-import { TopicsCard } from "../types.tsx"
-import TitleCard from "./Components/TitleCard.tsx"
-import TopicCard from "./Components/TopicCard.tsx"
-import MenuBar from "./Components/MenuBar.tsx"
-import { Box, Container } from '@mui/material'
-import algebra from "/categories/algebra.png"
-import calculus from "/categories/calculus.png"
-import geometry from "/categories/geometry.png"
-import numberTheory from "/categories/number theory.png"
-import pAndStats from "/categories/probability and statistics.png"
-import others from "/categories/others.png"
-import {useLocation} from "react-router-dom"
-import BackButton from "./Components/BackButton.tsx"
+import { TopicsCard } from "../types.tsx";
+import TitleCard from "./Components/TitleCard.tsx";
+import TopicCard from "./Components/TopicCard.tsx";
+import MenuBar from "./Components/MenuBar.tsx";
+import { Box, Container } from '@mui/material';
+import algebra from "/categories/algebra.png";
+import calculus from "/categories/calculus.png";
+import geometry from "/categories/geometry.png";
+import numberTheory from "/categories/number theory.png";
+import pAndStats from "/categories/probability and statistics.png";
+import others from "/categories/others.png";
+import { useLocation } from "react-router-dom";
+import BackButton from "./Components/BackButton.tsx";
 
 function Homepage() {
 

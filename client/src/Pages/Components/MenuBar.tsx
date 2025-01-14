@@ -9,17 +9,15 @@ import {
     ListItemButton,
     ListItemIcon,
     Typography
-} from "@mui/material"
-import { useState } from "react"
-import {MenuRounded, HomeRounded, Person, Logout} from "@mui/icons-material"
-import { useNavigate } from "react-router-dom"
-import {LoggedUser, MenuTopic} from "../../types.tsx"
-
-// Make Logout function
+} from "@mui/material";
+import { useState } from "react";
+import { MenuRounded, HomeRounded, Person, Logout } from "@mui/icons-material";
+import { NavigateFunction, useNavigate } from "react-router-dom";
+import { LoggedUser, MenuTopic } from "../../types.tsx";
 
 export default function MenuBar( { name }: LoggedUser) {
 
-    const navigate = useNavigate();
+    const navigate: NavigateFunction = useNavigate();
     const [open, setOpen] = useState(false);
 
     const toggleDrawer = (newOpen: boolean) => () => {
@@ -81,7 +79,7 @@ export default function MenuBar( { name }: LoggedUser) {
             </List>
             <Divider/>
             <List>
-                { MenuTopicList.map((item) => (
+                { MenuTopicList.map((item: MenuTopic) => (
                       <ListItem key={item.topic}>
                           <ListItemButton onClick={handleClick(item.link)}>
                               <Typography variant="h3">{item.topic}</Typography>

@@ -1,10 +1,9 @@
-import {Paper, Typography} from "@mui/material"
+import { Paper, Typography } from "@mui/material";
 
 
 export default function TitleCard() {
     return (
-        // @ts-ignore
-        <Paper elevation="24" square="false" sx={{
+        <Paper elevation={24} square={false} sx={{
             height: 120,
             width: 600,
             display: "flex",
@@ -15,7 +14,7 @@ export default function TitleCard() {
             textAlign: "center",
         }}>
             <Typography variant="h1">
-                My Math Forum
+                Math Exchange
             </Typography>
         </Paper>
     );

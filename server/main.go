@@ -32,7 +32,7 @@ func main() {
 	// App config
 	app.Static("/", "../public")
 	app.Use(cors.New(cors.Config{
-		AllowOrigins: "http://localhost:5173",
+		AllowOrigins: "http://127.0.0.1:4000",
 		AllowHeaders: "Origin, Content-Type, Accept",
 		AllowMethods: "GET, POST, HEAD, PUT, DELETE, PATCH",
 	}))

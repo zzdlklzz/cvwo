@@ -1,15 +1,15 @@
-import { Button, Card, CardContent, CardHeader, CircularProgress, Container, Typography } from "@mui/material"
-import { SubmitHandler, useForm } from "react-hook-form"
-import { UserForm } from "../types.tsx"
-import "./Login.css"
-import { useState, useEffect } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Button, Card, CardContent, CardHeader, CircularProgress, Container, Typography } from "@mui/material";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { UserForm } from "../types.tsx";
+import "./Login.css";
+import { useState, useEffect } from "react";
+import { Link, NavigateFunction, useNavigate } from "react-router-dom";
 
 const ENDPOINT: string = "http://localhost:4000/api/login";
 
 export default function Login() {
 
-    const navigate = useNavigate();
+    const navigate: NavigateFunction = useNavigate();
 
     const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<UserForm>();
     const [users, setUsers] = useState<UserForm[]>([]);
@@ -21,7 +21,7 @@ export default function Login() {
             .catch((error) => console.log(error));
     }, []);
 
-    const onSubmit: SubmitHandler<UserForm> = async (data) => {
+    const onSubmit: SubmitHandler<UserForm> = async (data: UserForm) => {
 
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -30,7 +30,7 @@ export default function Login() {
             setError("name", { message: "Username does not exist", })
         }
 
-        for (let i = 0; i < users.length; i++) {
+        for (let i: number = 0; i < users.length; i++) {
             const user: UserForm = users[i];
             if (user.name === data.name) {
                 if (user.password !== data.password) {

@@ -1,12 +1,12 @@
-import { useLocation, useNavigate } from "react-router-dom"
-import MenuBar from "./Components/MenuBar.tsx"
-import { Card, CardActions, CardContent, CircularProgress, Container, Divider, Typography } from "@mui/material"
-import BackButton from "./Components/BackButton.tsx"
-import { SubmitHandler, useForm } from "react-hook-form"
-import { PostForm } from "../types.tsx"
-import { useEffect, useState } from "react"
-import ImageToBase64 from "./functions/ImageToBase64.tsx"
-import "./CreatePost.css"
+import { NavigateFunction, useLocation, useNavigate } from "react-router-dom";
+import MenuBar from "./Components/MenuBar.tsx";
+import { Card, CardActions, CardContent, CircularProgress, Container, Divider, Typography } from "@mui/material";
+import BackButton from "./Components/BackButton.tsx";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { PostForm } from "../types.tsx";
+import { useEffect, useState } from "react";
+import ImageToBase64 from "./functions/ImageToBase64.tsx";
+import "./CreatePost.css";
 
 type LoggedUser = {
     ID: number;
@@ -19,7 +19,7 @@ const POSTS_ENDPOINT: string = "http://localhost:4000/api/posts";
 export default function CreatePost() {
 
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<PostForm>();
-    const navigate = useNavigate();
+    const navigate: NavigateFunction = useNavigate();
     const location = useLocation();
     const name: string = location.state.name;
     const topic: string = location.state.topic;
@@ -42,7 +42,7 @@ export default function CreatePost() {
             .catch((error) => console.log(error));
     }, []);
 
-    const createPost: SubmitHandler<PostForm> = async (data) => {
+    const createPost: SubmitHandler<PostForm> = async (data: PostForm) => {
 
         setHasError(false);
 

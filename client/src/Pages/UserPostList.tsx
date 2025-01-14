@@ -1,8 +1,8 @@
 // Page with list of user's post
 // Delete post function is within this element, edit post is in a separate element
 
-import {useEffect, useState} from "react"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { NavigateFunction, useLocation, useNavigate } from "react-router-dom";
 import {
     Box,
     Button,
@@ -14,11 +14,11 @@ import {
     ListItem,
     ListItemButton, Modal,
     Typography
-} from "@mui/material"
-import MenuBar from "./Components/MenuBar.tsx"
-import { DeleteForever, Edit } from "@mui/icons-material"
-import BackButton from "./Components/BackButton.tsx"
-import { UserPost } from "../types.tsx"
+} from "@mui/material";
+import MenuBar from "./Components/MenuBar.tsx";
+import { DeleteForever, Edit } from "@mui/icons-material";
+import BackButton from "./Components/BackButton.tsx";
+import { UserPost } from "../types.tsx";
 
 type LoggedUser = {
     ID: string;
@@ -31,7 +31,7 @@ const DELETE_ENDPOINT: string = "http://localhost:4000/api/posts";
 
 export default function UserPostList() {
 
-    const navigate = useNavigate();
+    const navigate: NavigateFunction = useNavigate();
     const location = useLocation();
     const name: string = location.state.name;
     const [userPosts, setUserPosts] = useState<UserPost[]>();
@@ -51,7 +51,7 @@ export default function UserPostList() {
 
     // Fetch user's posts
     useEffect(() => {
-        fetchData().then((result) => setUserPosts(result))
+        fetchData().then((result: UserPost[]) => setUserPosts(result))
             .catch((error) => console.log(error));
     }, []);
 
@@ -83,7 +83,7 @@ export default function UserPostList() {
     const userPostList = (
         <Box>
             <List>
-                { userPosts && userPosts.map( (post) => (
+                { userPosts && userPosts.map( (post: UserPost) => (
                     <ListItem key={post.ID}>
                         <ListItemButton component={Card} elevation={3} sx={{
                             bgcolor: "secondary.main",

@@ -1,6 +1,6 @@
-import {Avatar, Card, CardContent, CardHeader, Divider, List, ListItem, Typography} from "@mui/material";
+import { Avatar, Card, CardContent, CardHeader, Divider, List, ListItem, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Comment } from "../../types.tsx"
+import { Comment } from "../../types.tsx";
 
 type PostID = {
     id: number | undefined;
@@ -22,7 +22,7 @@ export default function CommentsList({ id }: PostID) {
 
     return (
         <List>
-            {comments.map((comment) => (
+            {comments.map((comment: Comment) => (
                 <ListItem key={comment.ID}>
                     <Card elevation={3} sx={{
                         bgcolor: "secondary.main",

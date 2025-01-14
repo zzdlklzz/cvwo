@@ -1,16 +1,16 @@
-import {Button, Container, Typography} from "@mui/material"
-import { ArrowBackRounded } from "@mui/icons-material"
-import { useNavigate } from "react-router-dom"
+import { Button, Container, Typography } from "@mui/material";
+import { ArrowBackRounded } from "@mui/icons-material";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 
 export default function BackButton() {
-    const navigate = useNavigate();
+    const navigate: NavigateFunction = useNavigate();
     return (
         <Container sx={{
             position: "relative",
             width: 200,
         }}>
-            <Button variant="contained" onClick={() => {navigate(-1);}} sx={{
+            <Button variant="contained" onClick={() => navigate(-1)} sx={{
                 bgcolor: "white",
                 zIndex: 1,
                 height: 75,
