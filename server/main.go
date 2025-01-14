@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/template/html/v2"
@@ -17,8 +18,6 @@ func init() {
 	initializers.SyncDB()
 }
 
-// React js file in public folder is not updated to current version of frontend
-
 // Load templates
 var engine = html.New("./views", ".html")
 
@@ -29,10 +28,11 @@ var app = fiber.New(fiber.Config{
 
 func main() {
 
+	fmt.Println("Open application at http://localhost:" + os.Getenv("PORT"))
+
 	// App config
 	app.Static("/", "../public")
 	app.Use(cors.New(cors.Config{
-		AllowOrigins: "http://127.0.0.1:4000",
 		AllowHeaders: "Origin, Content-Type, Accept",
 		AllowMethods: "GET, POST, HEAD, PUT, DELETE, PATCH",
 	}))
