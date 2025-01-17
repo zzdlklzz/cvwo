@@ -62,7 +62,7 @@ export default function Login() {
                flexDirection: "column",
                justifyContent: "start",
            }}>
-               <CardHeader title="Welcome to Math Forum!" titleTypographyProps={{
+               <CardHeader title="Welcome to Math Exchange!" titleTypographyProps={{
                    variant: "h2",
                    color: "white",
                    display: "flex",
