@@ -64,7 +64,7 @@ export default function Register() {
                 flexDirection: "column",
                 justifyContent: "start",
             }}>
-                <CardHeader title="Register for Math Forum!" titleTypographyProps={{
+                <CardHeader title="Register for Math Exchange!" titleTypographyProps={{
                     variant: "h2",
                     color: "white",
                     display: "flex",
